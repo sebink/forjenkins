@@ -8,9 +8,7 @@ describe "Login" do
 
   before(:all) do
 
-#...........................For SauceLab..........................
-=begin
-    caps = Selenium::WebDriver::Remote::Capabilities.firefox
+caps = Selenium::WebDriver::Remote::Capabilities.firefox
     caps['platform'] = "Windows 8.1"
     caps['version'] = "26"
     caps[:name] = "Login"
@@ -19,24 +17,11 @@ describe "Login" do
         :remote,
         :url => "http://btsauce:3d284ce4-ce68-4128-acc2-da28928ff141@ondemand.saucelabs.com:80/wd/hub",
         :desired_capabilities => caps)
-
-    @base_url = "http://uat-portal.blutrumpet.com/"
-    @accept_next_alert = true
-    @driver.manage.timeouts.implicit_wait = 30
-    @verification_errors = []
-
-
-=end
-
-#............................For Local run ..........................
-
-    @driver = Selenium::WebDriver.for :firefox
-    @driver.manage().window().maximize()
-
-    @base_url = "http://uat-portal.blutrumpet.com/"
-    @accept_next_alert = true
-    @driver.manage.timeouts.implicit_wait = 30
-    @verification_errors = []
+        
+   @base_url = "http://uat-portal.blutrumpet.com/"
+   @accept_next_alert = true
+   @driver.manage.timeouts.implicit_wait = 30
+   @verification_errors = []
     
 
 

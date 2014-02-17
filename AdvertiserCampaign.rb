@@ -11,15 +11,6 @@ puts('Test Suite Changed --------Advertiser Campaign---------------')
   before(:all) do
 
 
-    @driver = Selenium::WebDriver.for :firefox
-    @driver.manage().window().maximize()
-    @base_url = 'http://uat-portal.blutrumpet.com/'
-    @accept_next_alert = true
-    @driver.manage.timeouts.implicit_wait = 30
-    @verification_errors = []
-
-    
-=begin    
     caps = Selenium::WebDriver::Remote::Capabilities.firefox
     caps['platform'] = "Windows 8.1"
     caps['version'] = "26"
@@ -29,11 +20,11 @@ puts('Test Suite Changed --------Advertiser Campaign---------------')
         :remote,
         :url => "http://btsauce:3d284ce4-ce68-4128-acc2-da28928ff141@ondemand.saucelabs.com:80/wd/hub",
         :desired_capabilities => caps)
-=end
-   # @base_url = "http://uat-portal.blutrumpet.com/"
-   ## @accept_next_alert = true
-    #@driver.manage.timeouts.implicit_wait = 30
-    #@verification_errors = []
+
+   @base_url = "http://uat-portal.blutrumpet.com/"
+   @accept_next_alert = true
+    @driver.manage.timeouts.implicit_wait = 30
+    @verification_errors = []
 
     CampaignName = 'Advertiser Camp '.concat(Array.new(10){rand(10).to_s(10)}.join)
 
@@ -42,13 +33,13 @@ puts('Test Suite Changed --------Advertiser Campaign---------------')
   # do these steps before all
   after(:all) do
 
-   # @verification_errors.should = []
+   # @verification_errors.should == []
    # @driver.find_element(:xpath,"//*[@id='pgWrap']/div[1]/div[2]/img").click
    # @driver.find_element(:xpath,"//*[@id='pgWrap']/div[1]/div[2]/div/div[5]").click
     #sleep 5
 
-    #verify { (@driver.find_element(:xpath, "//*[@id='topBar']/div/div[1]/ul[2]/li[3]/a").text).should = 'SIGN UP' }
-    #verify { (@driver.find_element(:xpath, "//*[@id='topBar']/div/div[1]/ul[2]/li[4]/a").text).should = 'LOG IN' }
+    #verify { (@driver.find_element(:xpath, "//*[@id='topBar']/div/div[1]/ul[2]/li[3]/a").text).should == 'SIGN UP' }
+    #verify { (@driver.find_element(:xpath, "//*[@id='topBar']/div/div[1]/ul[2]/li[4]/a").text).should == 'LOG IN' }
     @driver.quit
 
   end
@@ -69,13 +60,13 @@ puts('Test Suite Changed --------Advertiser Campaign---------------')
     !60.times{ break if (element_present?(:id, 'userName') rescue false); sleep 1 }
     sleep 10
 
-    verify { (@driver.find_element(:id, 'userName').text).should = 'Sebin Baby'}
-    verify { (@driver.title).should = 'BluTrumpet Admin'}
-    verify { (@driver.find_element(:css, 'button.drkGrey').text).should = 'FILTER' }
-    verify { (@driver.find_element(:css, 'div.chartHdr').text).should = 'Application Earn' }
-    verify { (@driver.find_element(:css, 'div.chartCell.right > div.chartHdr').text).should = 'Campaign Spend' }
-    verify { (@driver.find_element(:xpath, "//div[@id='pgWrap']/div[3]/div[5]/div").text).should = 'Campaign Installs' }
-    verify { (@driver.find_element(:xpath, "//div[@id='pgWrap']/div[3]/div[4]/div").text).should = 'Campaign Impressions' }
+    verify { (@driver.find_element(:id, 'userName').text).should == 'Sebin Baby'}
+    verify { (@driver.title).should == 'BluTrumpet Admin'}
+    verify { (@driver.find_element(:css, 'button.drkGrey').text).should == 'FILTER' }
+    verify { (@driver.find_element(:css, 'div.chartHdr').text).should == 'Application Earn' }
+    verify { (@driver.find_element(:css, 'div.chartCell.right > div.chartHdr').text).should == 'Campaign Spend' }
+    verify { (@driver.find_element(:xpath, "//div[@id='pgWrap']/div[3]/div[5]/div").text).should == 'Campaign Installs' }
+    verify { (@driver.find_element(:xpath, "//div[@id='pgWrap']/div[3]/div[4]/div").text).should == 'Campaign Impressions' }
 
   end
 
@@ -84,16 +75,16 @@ puts('Test Suite Changed --------Advertiser Campaign---------------')
 
     puts('.....................Creation_Advertiser_Campaign_Landing_Page_Checking.....................')
     @driver.get(@base_url + '/b/advertiser_campaign.html')
-    sleep 3
+    sleep 10
     time = Date.today
     formatedDate = time.strftime('%Y-%m-%d')
-    (@driver.find_element(:xpath,"//*[@id='campaignName']").text).should = ''
-    (@driver.find_element(:xpath,".//*[@id='appDescription']").text).should = ''
-    @driver.find_element(:name, 'campaignStartDate').attribute('value').should = formatedDate
-    (@driver.find_element(:xpath,"//div[@id='undefined-sticky-wrapper']/div/div[1]").text).should  = 'Basic Settings'
-    (@driver.find_element(:xpath,"//div[@id='undefined-sticky-wrapper']/div/div[2]").text).should  = 'Financial'
-    (@driver.find_element(:xpath,"//div[@id='undefined-sticky-wrapper']/div/div[3]").text).should  = 'Targeting'
-    (@driver.find_element(:xpath,"//div[@id='undefined-sticky-wrapper']/div/div[4]").text).should  = 'Creatives'
+    (@driver.find_element(:xpath,"//*[@id='campaignName']").text).should == ''
+    (@driver.find_element(:xpath,".//*[@id='appDescription']").text).should == ''
+    @driver.find_element(:name, 'campaignStartDate').attribute('value').should == formatedDate
+    (@driver.find_element(:xpath,"//div[@id='undefined-sticky-wrapper']/div/div[1]").text).should  == 'Basic Settings'
+    (@driver.find_element(:xpath,"//div[@id='undefined-sticky-wrapper']/div/div[2]").text).should  == 'Financial'
+    (@driver.find_element(:xpath,"//div[@id='undefined-sticky-wrapper']/div/div[3]").text).should  == 'Targeting'
+    (@driver.find_element(:xpath,"//div[@id='undefined-sticky-wrapper']/div/div[4]").text).should  == 'Creatives'
 
     @driver.find_element(:xpath,"//div[@id='undefined-sticky-wrapper']/div/div[2]").click
     @driver.find_element(:xpath,"//div[@id='undefined-sticky-wrapper']/div/div[3]").click
@@ -107,7 +98,7 @@ puts('Test Suite Changed --------Advertiser Campaign---------------')
     puts('.....................Should_Not_Create_Campaign_When_CampaignName_Is_Empty.....................')
 
     @driver.get(@base_url + '/b/advertiser_campaign.html')
-    sleep 3
+    sleep 10
     @driver.find_element(:id, 'campaignName').clear
     @driver.find_element(:id, 'campaignName').send_keys ''
     @driver.find_element(:id, 'appDescription').clear
@@ -117,7 +108,7 @@ puts('Test Suite Changed --------Advertiser Campaign---------------')
     sleep 2
     @driver.find_element(:xpath, "//*[@id='select2-drop']/div/input").send_key AppNameEditted
     sleep 2
-    verify { (@driver.find_element(:xpath, ".//*[@id='select2-drop']/ul/li/div").text).should = AppNameEditted
+    verify { (@driver.find_element(:xpath, ".//*[@id='select2-drop']/ul/li/div").text).should == AppNameEditted
     }
     @driver.find_element(:xpath, ".//*[@id='select2-drop']/ul/li/div").click
 
@@ -126,7 +117,7 @@ puts('Test Suite Changed --------Advertiser Campaign---------------')
 
     @driver.find_element(:name, 'campaignStartDate').clear
     @driver.find_element(:name, 'campaignStartDate').send_key formatedDate
-    sleep 3
+    sleep 10
     @driver.find_element(:xpath, "//div[@id='undefined-sticky-wrapper']/div/div[2]").click
     sleep 2
     @driver.find_element(:name, 'campaignBid').clear
@@ -139,13 +130,13 @@ puts('Test Suite Changed --------Advertiser Campaign---------------')
     @driver.find_element(:xpath, "//div[@id='undefined-sticky-wrapper']/div/div[3]").click
     @driver.find_element(:xpath ,"//*[@id='s2id_autogen13']/a").click
     @driver.find_element(:xpath, "//*[@id='select2-drop']/div/input").send_key '2.1'
-    verify { (@driver.find_element(:xpath, "//*[@id='select2-drop']/ul/li[1]/div").text).should = '2.1' }
+    verify { (@driver.find_element(:xpath, "//*[@id='select2-drop']/ul/li[1]/div").text).should == '2.1' }
     @driver.find_element(:xpath, "//*[@id='select2-drop']/ul/li[1]/div").click
     @driver.find_element(:xpath, "//div[@id='undefined-sticky-wrapper']/div/div[4]").click
     @driver.find_element(:name, 'ui_ad_type_2').click
     @driver.find_element(:css, 'button.greenLarge.submitForm').click
     sleep 20
-    (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should = GeneralErrorMessage
+    (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should == GeneralErrorMessage
 
 
   end
@@ -156,7 +147,7 @@ puts('Test Suite Changed --------Advertiser Campaign---------------')
     puts('.....................Should_Not_Create_Campaign_When_CampaignName_Is_Invalid.....................')
 
     @driver.get(@base_url + '/b/advertiser_campaign.html')
-    sleep 3
+    sleep 10
     @driver.find_element(:id, 'campaignName').clear
     @driver.find_element(:id, 'campaignName').send_keys ' '
     @driver.find_element(:id, 'appDescription').clear
@@ -166,7 +157,7 @@ puts('Test Suite Changed --------Advertiser Campaign---------------')
     sleep 2
     @driver.find_element(:xpath, "//*[@id='select2-drop']/div/input").send_key AppNameEditted
     sleep 2
-    verify { (@driver.find_element(:xpath, ".//*[@id='select2-drop']/ul/li/div").text).should = AppNameEditted
+    verify { (@driver.find_element(:xpath, ".//*[@id='select2-drop']/ul/li/div").text).should == AppNameEditted
     }
     @driver.find_element(:xpath, ".//*[@id='select2-drop']/ul/li/div").click
 
@@ -181,7 +172,7 @@ puts('Test Suite Changed --------Advertiser Campaign---------------')
 
     @driver.find_element(:css, "button.greenLarge.submitForm").click
     sleep 20
-    (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should = GeneralErrorMessage
+    (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should == GeneralErrorMessage
 
 
   end
@@ -194,7 +185,7 @@ it 'Should_Not_Create_Campaign_When_AppName_Is_Empty' do
   #puts(AppNameEditted)
 
   @driver.get(@base_url + "/b/advertiser_campaign.html")
-  sleep 3
+  sleep 10
   @driver.find_element(:id, "campaignName").clear
   @driver.find_element(:id, "campaignName").send_keys CampaignName
   @driver.find_element(:id, "appDescription").clear
@@ -209,14 +200,14 @@ it 'Should_Not_Create_Campaign_When_AppName_Is_Empty' do
 
 
   financialSection
-  sleep 3
+  sleep 10
   @driver.find_element(:xpath, "//div[@id='undefined-sticky-wrapper']/div/div[3]").click
   @driver.find_element(:xpath, "//div[@id='undefined-sticky-wrapper']/div/div[4]").click
-  @driver.find_element(:name, 'ui_ad_type_2').click
+
 
   @driver.find_element(:css, "button.greenLarge.submitForm").click
   sleep 20
-  (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should = GeneralErrorMessage
+  (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should == GeneralErrorMessage
 
 end
 
@@ -226,7 +217,7 @@ end
 
     puts(".....................Should_Not_Create_Campaign_When_Campaign_Description_Is_Empty.....................")
     @driver.get(@base_url + "/b/advertiser_campaign.html")
-    sleep 3
+    sleep 10
     @driver.find_element(:id, "campaignName").clear
     @driver.find_element(:id, "campaignName").send_keys CampaignName
     @driver.find_element(:id, "appDescription").clear
@@ -236,7 +227,7 @@ end
     sleep 2
     @driver.find_element(:xpath, "//*[@id='select2-drop']/div/input").send_key AppNameEditted
     sleep 2
-    verify { (@driver.find_element(:xpath, ".//*[@id='select2-drop']/ul/li/div").text).should = AppNameEditted}
+    verify { (@driver.find_element(:xpath, ".//*[@id='select2-drop']/ul/li/div").text).should == AppNameEditted}
     @driver.find_element(:xpath, ".//*[@id='select2-drop']/ul/li/div").click
 
     time = Date.today + 1
@@ -251,7 +242,7 @@ end
 
     @driver.find_element(:css, "button.greenLarge.submitForm").click
     sleep 20
-    (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should = GeneralErrorMessage
+    (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should == GeneralErrorMessage
 
   end
 
@@ -261,7 +252,7 @@ end
 
     puts(".....................Should_Not_Create_Campaign_When_Campaign_Description_Is_Invalid.....................")
     @driver.get(@base_url + "/b/advertiser_campaign.html")
-    sleep 3
+    sleep 10
     @driver.find_element(:id, "campaignName").clear
     @driver.find_element(:id, "campaignName").send_keys CampaignName
     @driver.find_element(:id, "appDescription").clear
@@ -271,7 +262,7 @@ end
     sleep 2
     @driver.find_element(:xpath, "//*[@id='select2-drop']/div/input").send_key AppNameEditted
     sleep 2
-    verify { (@driver.find_element(:xpath, ".//*[@id='select2-drop']/ul/li/div").text).should = AppNameEditted}
+    verify { (@driver.find_element(:xpath, ".//*[@id='select2-drop']/ul/li/div").text).should == AppNameEditted}
     @driver.find_element(:xpath, ".//*[@id='select2-drop']/ul/li/div").click
 
     time = Date.today + 1
@@ -286,7 +277,7 @@ end
 
     @driver.find_element(:css, "button.greenLarge.submitForm").click
     sleep 20
-    (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should = GeneralErrorMessage
+    (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should == GeneralErrorMessage
 
   end
 
@@ -295,7 +286,7 @@ end
 
     puts(".....................Should_Not_Create_Campaign_When_Campaign_StartDate_Is_Empty.....................")
     @driver.get(@base_url + "/b/advertiser_campaign.html")
-    sleep 3
+    sleep 10
     @driver.find_element(:id, "campaignName").clear
     @driver.find_element(:id, "campaignName").send_keys CampaignName
     @driver.find_element(:id, "appDescription").clear
@@ -305,7 +296,7 @@ end
     sleep 2
     @driver.find_element(:xpath, "//*[@id='select2-drop']/div/input").send_key AppNameEditted
     sleep 2
-    verify { (@driver.find_element(:xpath, ".//*[@id='select2-drop']/ul/li/div").text).should = AppNameEditted}
+    verify { (@driver.find_element(:xpath, ".//*[@id='select2-drop']/ul/li/div").text).should == AppNameEditted}
     @driver.find_element(:xpath, ".//*[@id='select2-drop']/ul/li/div").click
 
     @driver.find_element(:name,"campaignStartDate").clear
@@ -317,7 +308,7 @@ end
 
     @driver.find_element(:css, "button.greenLarge.submitForm").click
     sleep 20
-    (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should = GeneralErrorMessage
+    (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should == GeneralErrorMessage
 
   end
 
@@ -326,7 +317,7 @@ end
 
     puts(".....................Should_Not_Create_Campaign_When_Campaign_StartDate_Is_Invalid.....................")
     @driver.get(@base_url + "/b/advertiser_campaign.html")
-    sleep 3
+    sleep 10
     @driver.find_element(:id, "campaignName").clear
     @driver.find_element(:id, "campaignName").send_keys CampaignName
     @driver.find_element(:id, "appDescription").clear
@@ -336,7 +327,7 @@ end
     sleep 2
     @driver.find_element(:xpath, "//*[@id='select2-drop']/div/input").send_key AppNameEditted
     sleep 2
-    verify { (@driver.find_element(:xpath, ".//*[@id='select2-drop']/ul/li/div").text).should = AppNameEditted}
+    verify { (@driver.find_element(:xpath, ".//*[@id='select2-drop']/ul/li/div").text).should == AppNameEditted}
     @driver.find_element(:xpath, ".//*[@id='select2-drop']/ul/li/div").click
 
     @driver.find_element(:name,"campaignStartDate").clear
@@ -348,7 +339,7 @@ end
 
     @driver.find_element(:css, "button.greenLarge.submitForm").click
     sleep 20
-    (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should = GeneralErrorMessage
+    (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should == GeneralErrorMessage
 
   end
 
@@ -358,7 +349,7 @@ end
 
     puts(".....................Should_Not_Create_Campaign_When_Campaign_StartDate_Is_LessThan_Current_Date.....................")
     @driver.get(@base_url + "/b/advertiser_campaign.html")
-    sleep 3
+    sleep 10
     @driver.find_element(:id, "campaignName").clear
     @driver.find_element(:id, "campaignName").send_keys CampaignName
     @driver.find_element(:id, "appDescription").clear
@@ -368,7 +359,7 @@ end
     sleep 2
     @driver.find_element(:xpath, "//*[@id='select2-drop']/div/input").send_key AppNameEditted
     sleep 2
-    verify { (@driver.find_element(:xpath, ".//*[@id='select2-drop']/ul/li/div").text).should = AppNameEditted}
+    verify { (@driver.find_element(:xpath, ".//*[@id='select2-drop']/ul/li/div").text).should == AppNameEditted}
     @driver.find_element(:xpath, ".//*[@id='select2-drop']/ul/li/div").click
 
     time = Date.today - 1
@@ -382,7 +373,7 @@ end
 
     @driver.find_element(:css, "button.greenLarge.submitForm").click
     sleep 20
-    (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should = GeneralErrorMessage
+    (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should == GeneralErrorMessage
 
   end
 
@@ -391,7 +382,7 @@ end
 
     puts(".....................Should_Not_Create_Campaign_When_Campaign_StartDate_Is_GreaterThan_EndDate.....................")
     @driver.get(@base_url + "/b/advertiser_campaign.html")
-    sleep 3
+    sleep 10
     @driver.find_element(:id, "campaignName").clear
     @driver.find_element(:id, "campaignName").send_keys CampaignName
     @driver.find_element(:id, "appDescription").clear
@@ -401,7 +392,7 @@ end
     sleep 2
     @driver.find_element(:xpath, "//*[@id='select2-drop']/div/input").send_key AppNameEditted
     sleep 2
-    verify { (@driver.find_element(:xpath, ".//*[@id='select2-drop']/ul/li/div").text).should = AppNameEditted}
+    verify { (@driver.find_element(:xpath, ".//*[@id='select2-drop']/ul/li/div").text).should == AppNameEditted}
     @driver.find_element(:xpath, ".//*[@id='select2-drop']/ul/li/div").click
 
     timeStartDate = Date.today + 1
@@ -420,7 +411,7 @@ end
 
     @driver.find_element(:css, "button.greenLarge.submitForm").click
     sleep 20
-    (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should = GeneralErrorMessage
+    (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should == GeneralErrorMessage
 
   end
 
@@ -429,7 +420,7 @@ end
 
     puts(".....................Should_Not_Create_Campaign_When_Campaign_EndDate_Is_invalid.....................")
     @driver.get(@base_url + "/b/advertiser_campaign.html")
-    sleep 3
+    sleep 10
     @driver.find_element(:id, "campaignName").clear
     @driver.find_element(:id, "campaignName").send_keys CampaignName
     @driver.find_element(:id, "appDescription").clear
@@ -439,7 +430,7 @@ end
     sleep 2
     @driver.find_element(:xpath, "//*[@id='select2-drop']/div/input").send_key AppNameEditted
     sleep 2
-    verify { (@driver.find_element(:xpath, ".//*[@id='select2-drop']/ul/li/div").text).should = AppNameEditted}
+    verify { (@driver.find_element(:xpath, ".//*[@id='select2-drop']/ul/li/div").text).should == AppNameEditted}
     @driver.find_element(:xpath, ".//*[@id='select2-drop']/ul/li/div").click
 
     time = Date.today + 1
@@ -456,7 +447,7 @@ end
 
     @driver.find_element(:css, "button.greenLarge.submitForm").click
     sleep 20
-    (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should = GeneralErrorMessage
+    (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should == GeneralErrorMessage
 
   end
 
@@ -467,7 +458,7 @@ end
 
     basicSettingsSection
 
-    sleep 3
+    sleep 10
     @driver.find_element(:xpath, "//div[@id='undefined-sticky-wrapper']/div/div[2]").click
     sleep 2
     @driver.find_element(:name, "campaignBid").clear
@@ -482,7 +473,7 @@ end
 
     @driver.find_element(:css, "button.greenLarge.submitForm").click
     sleep 20
-    (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should = GeneralErrorMessage
+    (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should == GeneralErrorMessage
 
   end
 
@@ -493,7 +484,7 @@ end
 
     basicSettingsSection
 
-    sleep 3
+    sleep 10
     @driver.find_element(:xpath, "//div[@id='undefined-sticky-wrapper']/div/div[2]").click
     sleep 2
     @driver.find_element(:name, "campaignBid").clear
@@ -505,7 +496,7 @@ end
     targetingAndCreativeSections
     @driver.find_element(:css, "button.greenLarge.submitForm").click
     sleep 20
-    (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should = GeneralErrorMessage
+    (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should == GeneralErrorMessage
 
   end
 
@@ -516,7 +507,7 @@ end
 
     basicSettingsSection
 
-    sleep 3
+    sleep 10
     @driver.find_element(:xpath, "//div[@id='undefined-sticky-wrapper']/div/div[2]").click
     sleep 2
     @driver.find_element(:name, "campaignBid").clear
@@ -528,7 +519,7 @@ end
     targetingAndCreativeSections
     @driver.find_element(:css, "button.greenLarge.submitForm").click
     sleep 20
-    (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should = GeneralErrorMessage
+    (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should == GeneralErrorMessage
 
   end
 
@@ -539,7 +530,7 @@ end
 
     basicSettingsSection
 
-    sleep 3
+    sleep 10
     @driver.find_element(:xpath, "//div[@id='undefined-sticky-wrapper']/div/div[2]").click
     sleep 2
     @driver.find_element(:name, "campaignBid").clear
@@ -551,7 +542,7 @@ end
     targetingAndCreativeSections
     @driver.find_element(:css, "button.greenLarge.submitForm").click
     sleep 20
-    (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should = GeneralErrorMessage
+    (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should == GeneralErrorMessage
 
   end
 
@@ -562,7 +553,7 @@ end
 
     basicSettingsSection
 
-    sleep 3
+    sleep 10
     @driver.find_element(:xpath, "//div[@id='undefined-sticky-wrapper']/div/div[2]").click
     sleep 2
     @driver.find_element(:name, "campaignBid").clear
@@ -574,7 +565,7 @@ end
     targetingAndCreativeSections
     @driver.find_element(:css, "button.greenLarge.submitForm").click
     sleep 20
-    (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should = GeneralErrorMessage
+    (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should == GeneralErrorMessage
 
   end
 
@@ -585,7 +576,7 @@ end
 
     basicSettingsSection
 
-    sleep 3
+    sleep 10
     @driver.find_element(:xpath, "//div[@id='undefined-sticky-wrapper']/div/div[2]").click
     sleep 2
     @driver.find_element(:name, "campaignBid").clear
@@ -597,7 +588,7 @@ end
     targetingAndCreativeSections
     @driver.find_element(:css, "button.greenLarge.submitForm").click
     sleep 20
-    (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should = GeneralErrorMessage
+    (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should == GeneralErrorMessage
 
   end
 
@@ -608,7 +599,7 @@ end
 
     basicSettingsSection
 
-    sleep 3
+    sleep 10
     @driver.find_element(:xpath, "//div[@id='undefined-sticky-wrapper']/div/div[2]").click
     sleep 2
     @driver.find_element(:name, "campaignBid").clear
@@ -622,7 +613,7 @@ end
     
     @driver.find_element(:css, "button.greenLarge.submitForm").click
     sleep 20
-    (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should = GeneralErrorMessage
+    (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should == GeneralErrorMessage
 
   end
 
@@ -644,7 +635,7 @@ end
     targetingAndCreativeSections
     @driver.find_element(:css, "button.greenLarge.submitForm").click
     sleep 20
-    (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should = GeneralErrorMessage
+    (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should == GeneralErrorMessage
 
   end
 
@@ -655,7 +646,7 @@ end
 
   basicSettingsSection
 
-  sleep 3
+  sleep 10
   @driver.find_element(:xpath, "//div[@id='undefined-sticky-wrapper']/div/div[2]").click
   sleep 2
   @driver.find_element(:name, "campaignBid").clear
@@ -667,7 +658,7 @@ end
   targetingAndCreativeSections
   @driver.find_element(:css, "button.greenLarge.submitForm").click
   sleep 20
-  (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should = GeneralErrorMessage
+  (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should == GeneralErrorMessage
 
 end
 
@@ -678,7 +669,7 @@ it 'Should_Not_Create_Campaign_When_OverAllBudget_Is_Invalid' do
 
   basicSettingsSection
 
-  sleep 3
+  sleep 10
   @driver.find_element(:xpath, "//div[@id='undefined-sticky-wrapper']/div/div[2]").click
   sleep 2
   @driver.find_element(:name, "campaignBid").clear
@@ -690,7 +681,7 @@ it 'Should_Not_Create_Campaign_When_OverAllBudget_Is_Invalid' do
   targetingAndCreativeSections
   @driver.find_element(:css, "button.greenLarge.submitForm").click
   sleep 20
-  (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should = GeneralErrorMessage
+  (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should == GeneralErrorMessage
 
 end
 
@@ -714,7 +705,7 @@ it 'Should_Not_Create_Campaign_When_OverAllBudget_Is_NaN' do
 
   @driver.find_element(:css, "button.greenLarge.submitForm").click
   sleep 20
-  (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should = GeneralErrorMessage
+  (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should == GeneralErrorMessage
 
 end
 
@@ -726,16 +717,16 @@ end
     basicSettingsSection
     financialSection
 
-    sleep 3
+    sleep 10
     @driver.find_element(:xpath, "//div[@id='undefined-sticky-wrapper']/div/div[3]").click
     @driver.find_element(:xpath ,"//*[@id='s2id_autogen13']/a").click
     @driver.find_element(:xpath, "//*[@id='select2-drop']/div/input").send_key '2.1'
-    verify { (@driver.find_element(:xpath, "//*[@id='select2-drop']/ul/li[1]/div").text).should = '2.1' }
+    verify { (@driver.find_element(:xpath, "//*[@id='select2-drop']/ul/li[1]/div").text).should == '2.1' }
     @driver.find_element(:xpath, "//*[@id='select2-drop']/ul/li[1]/div").click
     @driver.find_element(:xpath, "//div[@id='undefined-sticky-wrapper']/div/div[4]").click
     @driver.find_element(:css, "button.greenLarge.submitForm").click
     sleep 20
-    (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should = GeneralErrorMessage
+    (@driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/div[1]").text).should == GeneralErrorMessage
 
   end
 
@@ -746,7 +737,7 @@ end
     puts(".....................Should_Create_Campaign_When_All_The_Informations_Are_valid.....................")
 
     @driver.get(@base_url + "/b/advertiser_campaign.html")
-    sleep 3
+    sleep 10
     @driver.find_element(:id, "campaignName").clear
     @driver.find_element(:id, "campaignName").send_keys CampaignName
     @driver.find_element(:id, "appDescription").clear
@@ -756,7 +747,7 @@ end
     sleep 2
     @driver.find_element(:xpath, "//*[@id='select2-drop']/div/input").send_key "Applications"
     sleep 2
-    verify { (@driver.find_element(:xpath, "//*[@id='select2-drop']/ul/li[1]/div").text).should = "Applications" }
+    verify { (@driver.find_element(:xpath, "//*[@id='select2-drop']/ul/li[1]/div").text).should == "Applications" }
     @driver.find_element(:xpath, "//*[@id='select2-drop']/ul/li[1]/div").click
 
     time = Date.today + 1
@@ -765,7 +756,7 @@ end
     @driver.find_element(:name,"campaignStartDate").clear
     @driver.find_element(:name, "campaignStartDate").send_key formatedDate
 
-    sleep 3
+    sleep 10
     @driver.find_element(:xpath, "//div[@id='undefined-sticky-wrapper']/div/div[2]").click
     sleep 2
     @driver.find_element(:name, "campaignBid").clear
@@ -780,7 +771,7 @@ end
     @driver.find_element(:xpath ,"//*[@id='s2id_autogen13']/a").click
     @driver.find_element(:xpath, "//*[@id='select2-drop']/div/input").send_key "2.1"
 
-    verify { (@driver.find_element(:xpath, "//*[@id='select2-drop']/ul/li[1]/div").text).should = "2.1" }
+    verify { (@driver.find_element(:xpath, "//*[@id='select2-drop']/ul/li[1]/div").text).should == "2.1" }
     @driver.find_element(:xpath, "//*[@id='select2-drop']/ul/li[1]/div").click
 
     @driver.find_element(:xpath, "//div[@id='undefined-sticky-wrapper']/div/div[4]").click
@@ -792,7 +783,7 @@ end
     @driver.find_element(:xpath, "//*[@id='filterApps']").send_keys CampaignName, :enter
     sleep 5
 
-    (@driver.find_element(:link, CampaignName).text).should = CampaignName
+    (@driver.find_element(:link, CampaignName).text).should == CampaignName
 
   end
   
@@ -817,7 +808,7 @@ end
     @driver.find_element(:link, CampaignName).click
     sleep 15
     
-    (@driver.find_element(:id, "appDescription").text).should = "Advertiser Campaign is editted"
+    (@driver.find_element(:id, "appDescription").text).should == "Advertiser Campaign is editted"
     @driver.get(@base_url + "/b/advertiser_campaign.html")
     sleep 20
     
@@ -825,7 +816,7 @@ end
     @driver.find_element(:xpath, "//*[@id='filterApps']").send_keys CampaignName, :enter
     sleep 5
 
-    (@driver.find_element(:link, CampaignName).text).should = CampaignName
+    (@driver.find_element(:link, CampaignName).text).should == CampaignName
     
   end
   
@@ -859,7 +850,7 @@ end
     sleep 15
     
     @driver.find_element(:xpath, "//div[@id='undefined-sticky-wrapper']/div/div[2]").click
-    sleep 3
+    sleep 10
      
     (@driver.find_element(:name, 'campaignBid').text).should == "21"
     (@driver.find_element(:id, 'dailymax').text).should == "33"
@@ -872,7 +863,7 @@ end
     @driver.find_element(:xpath, "//*[@id='filterApps']").send_keys CampaignName, :enter
     sleep 5
 
-    (@driver.find_element(:link, CampaignName).text).should = CampaignName
+    (@driver.find_element(:link, CampaignName).text).should == CampaignName
     
   end
   
@@ -884,15 +875,15 @@ end
     @driver.find_element(:link, CampaignName).click
     sleep 15
     
-    sleep 3
+    sleep 10
     @driver.find_element(:xpath, "//div[@id='undefined-sticky-wrapper']/div/div[3]").click
     @driver.find_element(:xpath ,"//*[@id='s2id_autogen13']/a").click
     @driver.find_element(:xpath, "//*[@id='select2-drop']/div/input").send_key '3.0'
-    verify { (@driver.find_element(:xpath, "//*[@id='select2-drop']/ul/li[1]/div").text).should = '3.0' }
+    verify { (@driver.find_element(:xpath, "//*[@id='select2-drop']/ul/li[1]/div").text).should == '3.0' }
     
     @driver.find_element(:xpath ,"//*[@id='s2id_autogen15']/a").click
     @driver.find_element(:xpath, "//*[@id='select2-drop']/div/input").send_key '4.3'
-    verify { (@driver.find_element(:xpath, "//*[@id='select2-drop']/ul/li[1]/div").text).should = '4.3' }
+    verify { (@driver.find_element(:xpath, "//*[@id='select2-drop']/ul/li[1]/div").text).should == '4.3' }
     
     @driver.find_element(:css, "button.greenLarge.submitForm").click
     sleep 20
@@ -906,7 +897,7 @@ end
     @driver.find_element(:xpath, "//*[@id='filterApps']").send_keys CampaignName, :enter
     sleep 5
 
-    (@driver.find_element(:link, CampaignName).text).should = CampaignName
+    (@driver.find_element(:link, CampaignName).text).should == CampaignName
     
   end
   
@@ -916,7 +907,7 @@ end
     puts("Edit camp")
 
 
-    sleep 3
+    sleep 10
     @driver.find_element(:link, CampaignName).click
     sleep 20
     !60.times{ break if (element_present?(:id, "campaignName") rescue false); sleep 1 }
@@ -940,7 +931,7 @@ end
     @driver.find_element(:xpath ,"//*[@id='s2id_autogen13']/a").click
     @driver.find_element(:xpath, "//*[@id='select2-drop']/div/input").send_key "3.1"
 
-    verify { (@driver.find_element(:xpath, "//*[@id='select2-drop']/ul/li[1]/div").text).should = "3.1" }
+    verify { (@driver.find_element(:xpath, "//*[@id='select2-drop']/ul/li[1]/div").text).should == "3.1" }
     @driver.find_element(:xpath, "//*[@id='select2-drop']/ul/li[1]/div").click
 
     @driver.find_element(:css, "button.greenLarge.submitForm").click
@@ -950,16 +941,16 @@ end
     @driver.find_element(:id, "filterApps").click
     @driver.find_element(:id, "filterApps").send_keys CampNameEditted, :enter
     !60.times{ break if (element_present?(:link, CampNameEditted) rescue false); sleep 1 }
-    (@driver.find_element(:link, CampNameEditted).text).should = CampNameEditted
+    (@driver.find_element(:link, CampNameEditted).text).should == CampNameEditted
     @driver.find_element(:link, CampNameEditted).click
     sleep 15
 
-    verify { (@driver.find_element(:id, "campaignName").text).should = CampNameEditted }
-    verify { (@driver.find_element(:id, "appDescription").text).should = "Editting automation testing of advertiser campaign "}
+    verify { (@driver.find_element(:id, "campaignName").text).should == CampNameEditted }
+    verify { (@driver.find_element(:id, "appDescription").text).should == "Editting automation testing of advertiser campaign "}
 
-    verify { (@driver.find_element(:name, "campaignBid").text).should = "4" }
-    verify { (@driver.find_element(:id, "dailymax").text).should = "45" }
-    verify { (@driver.find_element(:name, "overallMax").text).should = "456" }
+    verify { (@driver.find_element(:name, "campaignBid").text).should == "4" }
+    verify { (@driver.find_element(:id, "dailymax").text).should == "45" }
+    verify { (@driver.find_element(:name, "overallMax").text).should == "456" }
 
 
     @driver.find_element(:xpath, "//*[@id='pgWrap']/div[3]/form/div[7]/button[1]").click
@@ -969,7 +960,7 @@ end
     @driver.find_element(:id, "filterApps").send_keys CampNameEditted,:enter
 
     !60.times{ break if (element_present?(:link, CampNameEditted) rescue false); sleep 1 }
-    (@driver.find_element(:link, CampNameEditted).text).should = CampNameEditted
+    (@driver.find_element(:link, CampNameEditted).text).should == CampNameEditted
 
 
   end
@@ -977,7 +968,7 @@ end
   def basicSettingsSection
 
     @driver.get(@base_url + "/b/advertiser_campaign.html")
-    sleep 3
+    sleep 10
     @driver.find_element(:id, "campaignName").clear
     @driver.find_element(:id, "campaignName").send_keys CampaignName
     @driver.find_element(:id, "appDescription").clear
@@ -987,7 +978,7 @@ end
     sleep 2
     @driver.find_element(:xpath, "//*[@id='select2-drop']/div/input").send_key AppNameEditted
     sleep 2
-    verify { (@driver.find_element(:xpath, "//*[@id='select2-drop']/ul/li[1]/div").text).should = AppNameEditted }
+    verify { (@driver.find_element(:xpath, "//*[@id='select2-drop']/ul/li[1]/div").text).should == AppNameEditted }
     @driver.find_element(:xpath, "//*[@id='select2-drop']/ul/li[1]/div").click
 
     time = Date.today + 1
@@ -996,7 +987,7 @@ end
     @driver.find_element(:name, "campaignStartDate").clear
     @driver.find_element(:name, "campaignStartDate").send_key formatedDate
 
-    sleep 3
+    sleep 10
 
   end
 def financialSection
@@ -1014,11 +1005,11 @@ end
 
   def targetingAndCreativeSections
 
-    sleep 3
+    sleep 10
     @driver.find_element(:xpath, "//div[@id='undefined-sticky-wrapper']/div/div[3]").click
     @driver.find_element(:xpath ,"//*[@id='s2id_autogen13']/a").click
     @driver.find_element(:xpath, "//*[@id='select2-drop']/div/input").send_key '2.1'
-    verify { (@driver.find_element(:xpath, "//*[@id='select2-drop']/ul/li[1]/div").text).should = '2.1' }
+    verify { (@driver.find_element(:xpath, "//*[@id='select2-drop']/ul/li[1]/div").text).should == '2.1' }
     @driver.find_element(:xpath, "//*[@id='select2-drop']/ul/li[1]/div").click
     @driver.find_element(:xpath, "//div[@id='undefined-sticky-wrapper']/div/div[4]").click
     @driver.find_element(:name, 'ui_ad_type_2').click

@@ -11,13 +11,13 @@ describe 'App' do
   # Init Test
   before(:all) do
 
-    @driver = Selenium::WebDriver.for :firefox
-    @driver.manage().window().maximize()
-    @base_url = 'http://uat-portal.blutrumpet.com/'
-    @accept_next_alert = true
-    @driver.manage.timeouts.implicit_wait = 30
-    @verification_errors = []
-=begin
+   # @driver = Selenium::WebDriver.for :firefox
+  #  @driver.manage().window().maximize()
+  #  @base_url = 'http://uat-portal.blutrumpet.com/'
+   # @accept_next_alert = true
+  #  @driver.manage.timeouts.implicit_wait = 30
+  #  @verification_errors = []
+
     caps = Selenium::WebDriver::Remote::Capabilities.firefox
     caps['platform'] = "Windows 8.1"
     caps['version'] = "26"
@@ -32,7 +32,6 @@ describe 'App' do
       str = args.first.to_s
       str if File.exist?(str)
     end
-=end
     @base_url = "http://uat-portal.blutrumpet.com/"
     @accept_next_alert = true
     @driver.manage.timeouts.implicit_wait = 30
@@ -99,7 +98,7 @@ describe 'App' do
 
   end
 
-
+=begin
   #Creation App landing page checking
   it 'Creation_Page_should_populate_All_The_Fields ' do
 
@@ -284,7 +283,7 @@ describe 'App' do
 
   end
 
-
+=begin
   #Should_Not_Create_App_When_AppURL_Is_Not_Valid_For_Selected_AppStore
   it 'Should_Not_Create_App_When_AppURL_Is_Not_Valid_For_Selected_AppStore' do
 
@@ -490,7 +489,7 @@ describe 'App' do
 
   end
 
-
+=end
   it "Should_Create_App_When_All_The_Informations_Are_Valid" do
 
       puts("...........................Should_Create_App_When_All_The_Informations_Are_Valid...................")
@@ -562,7 +561,7 @@ describe 'App' do
       @driver.find_element(:css, "button.grey.navItem").click
 
   end
-
+=begin
   it 'Should_Edit_AppTitle_While_Editing_The_App' do
 
     puts("...........................Should_Edit_AppTitle_While_Editing_The_App...................")
@@ -717,7 +716,7 @@ describe 'App' do
 
   end
 
-
+=end
 
   it "Should_Be_Able_To_Edit_AppName" do
 
