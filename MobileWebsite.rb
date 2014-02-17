@@ -6,20 +6,16 @@ include RSpec::Expectations
 describe 'Login' do
 
   before(:all) do
-caps = Selenium::WebDriver::Remote::Capabilities.firefox
-    caps['platform'] = "Windows 8.1"
-    caps['version'] = "26"
-    caps[:name] = "Mobile Web Site"
+    path1= "/Applications/Firefox.app/Contents/MacOS/firefox-bin"
+        Selenium::WebDriver::Firefox.path =  path1
+    
+        @driver = Selenium::WebDriver.for :firefox
+        @driver.manage().window().maximize()
 
-    @driver = Selenium::WebDriver.for(
-        :remote,
-        :url => "http://btsauce:3d284ce4-ce68-4128-acc2-da28928ff141@ondemand.saucelabs.com:80/wd/hub",
-        :desired_capabilities => caps)
-        
-   @base_url = "http://uat-portal.blutrumpet.com/"
-   @accept_next_alert = true
-   @driver.manage.timeouts.implicit_wait = 30
-   @verification_errors = []
+        @base_url = "http://uat-portal.blutrumpet.com/"
+        @accept_next_alert = true
+        @driver.manage.timeouts.implicit_wait = 30
+        @verification_errors = []
 
     MW_Name = Array.new(10){rand(10).to_s(10)}.join
     MWURLBase = "https://play.google.com/store/apps/details?id=com"
