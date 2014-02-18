@@ -963,7 +963,7 @@ end
   
   def basicSettingsSection
 
-    @driver.get(@base_url + "/b/advertiser_campaign.html")
+    #@driver.get(@base_url + "/b/advertiser_campaign.html")
     sleep 10
     @driver.find_element(:id, "campaignName").clear
     @driver.find_element(:id, "campaignName").send_keys CampaignName
