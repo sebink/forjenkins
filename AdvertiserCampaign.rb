@@ -451,7 +451,8 @@ end
   it 'Should_Not_Create_Campaign_When_CPI_Is_empty' do
 
     puts(".....................Should_Not_Create_Campaign_When_CPI_Is_empty.....................")
-
+    
+    @driver.get(@base_url + "/b/advertiser_campaign.html")
     basicSettingsSection
 
     sleep 10
@@ -477,6 +478,7 @@ end
   it 'Should_Not_Create_Campaign_When_CPI_Is_Invalid' do
 
     puts(".....................Should_Not_Create_Campaign_When_CPI_Is_Invalid.....................")
+    @driver.get(@base_url + "/b/advertiser_campaign.html")
 
     basicSettingsSection
 
@@ -500,6 +502,7 @@ end
   it 'Should_Not_Create_Campaign_When_CPI_Is_NaN' do
 
     puts(".....................Should_Not_Create_Campaign_When_CPI_Is_NaN.....................")
+    @driver.get(@base_url + "/b/advertiser_campaign.html")
 
     basicSettingsSection
 
@@ -524,6 +527,7 @@ end
 
     puts(".....................Should_Not_Create_Campaign_When_CPI_Is_GreaterThan_DailyMaxBudget.....................")
 
+@driver.get(@base_url + "/b/advertiser_campaign.html")
     basicSettingsSection
 
     sleep 10
@@ -546,6 +550,7 @@ end
   it 'Should_Not_Create_Campaign_When_DailyMaxBudget_Is_Empty' do
 
     puts(".....................Should_Not_Create_Campaign_When_DailyMaxBudget_Is_Empty.....................")
+    @driver.get(@base_url + "/b/advertiser_campaign.html")
 
     basicSettingsSection
 
@@ -569,6 +574,7 @@ end
   it 'Should_Not_Create_Campaign_When_DailyMaxBudget_Is_Invalid' do
 
     puts(".....................Should_Not_Create_Campaign_When_DailyMaxBudget_Is_Invalid.....................")
+    @driver.get(@base_url + "/b/advertiser_campaign.html")
 
     basicSettingsSection
 
@@ -592,6 +598,7 @@ end
   it 'Should_Not_Create_Campaign_When_DailyMaxBudget_Is_NaN' do
 
     puts(".....................Should_Not_Create_Campaign_When_DailyMaxBudget_Is_NaN.....................")
+    @driver.get(@base_url + "/b/advertiser_campaign.html")
 
     basicSettingsSection
 
@@ -617,7 +624,7 @@ end
   it 'Should_Not_Create_Campaign_When_DailyMaxBudget_Is_GreaterThan_OverAllBudget' do
 
     puts(".....................Should_Not_Create_Campaign_When_DailyMaxBudget_Is_GreaterThan_OverAllBudget.....................")
-
+@driver.get(@base_url + "/b/advertiser_campaign.html")
     basicSettingsSection
 
     @driver.find_element(:xpath, "//div[@id='undefined-sticky-wrapper']/div/div[2]").click
@@ -639,6 +646,7 @@ end
   it 'Should_Not_Create_Campaign_When_OverAllBudget_Is_Empty' do
 
   puts(".....................Should_Not_Create_Campaign_When_OverAllBudget_Is_Empty.....................")
+  @driver.get(@base_url + "/b/advertiser_campaign.html")
 
   basicSettingsSection
 
@@ -662,6 +670,7 @@ end
 it 'Should_Not_Create_Campaign_When_OverAllBudget_Is_Invalid' do
 
   puts(".....................Should_Not_Create_Campaign_When_OverAllBudget_Is_Invalid.....................")
+  @driver.get(@base_url + "/b/advertiser_campaign.html")
 
   basicSettingsSection
 
@@ -685,6 +694,7 @@ end
 it 'Should_Not_Create_Campaign_When_OverAllBudget_Is_NaN' do
 
   puts(".....................Should_Not_Create_Campaign_When_OverAllBudget_Is_NaN.....................")
+  @driver.get(@base_url + "/b/advertiser_campaign.html")
 
   basicSettingsSection
 
@@ -709,6 +719,7 @@ end
   it 'Should_Not_Create_Campaign_When_Creatives_Are_Empty' do
 
     puts(".....................Should_Not_Create_Campaign_When_Creatives_Are_Empty.....................")
+    @driver.get(@base_url + "/b/advertiser_campaign.html")
 
     basicSettingsSection
     financialSection
