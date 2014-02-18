@@ -22,10 +22,10 @@ describe 'App' do
         @driver.manage.timeouts.implicit_wait = 30
         @verification_errors = []
         
-    @driver.file_detector = lambda do |args|
+    #@driver.file_detector = lambda do |args|
       # args => ["/path/to/file"]
-      str = args.first.to_s
-      str if File.exist?(str)
+     # str = args.first.to_s
+      #str if File.exist?(str)
     end
     @base_url = "http://uat-portal.blutrumpet.com/"
     @accept_next_alert = true
