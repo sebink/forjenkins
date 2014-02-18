@@ -28,6 +28,7 @@ describe "LandingPageChecking" do
   
   after(:each) do
     @driver.quit
+    @verification_errors.should == []
    
   end
 
