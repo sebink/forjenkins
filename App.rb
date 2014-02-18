@@ -26,7 +26,7 @@ describe 'App' do
       # args => ["/path/to/file"]
      # str = args.first.to_s
       #str if File.exist?(str)
-    end
+   # end
     @base_url = "http://uat-portal.blutrumpet.com/"
     @accept_next_alert = true
     @driver.manage.timeouts.implicit_wait = 30
