@@ -752,9 +752,9 @@ end
     sleep 10
     @driver.find_element(:xpath ,"//*[@id='s2id_autogen1']/a/span[1]").click
     sleep 2
-    @driver.find_element(:xpath, "//*[@id='select2-drop']/div/input").send_key "Applications"
+    @driver.find_element(:xpath, "//*[@id='select2-drop']/div/input").send_key AppNameEditted
     sleep 2
-    verify { (@driver.find_element(:xpath, "//*[@id='select2-drop']/ul/li[1]/div").text).should == "Applications" }
+    verify { (@driver.find_element(:xpath, "//*[@id='select2-drop']/ul/li[1]/div").text).should == AppNameEditted}
     @driver.find_element(:xpath, "//*[@id='select2-drop']/ul/li[1]/div").click
 
     time = Date.today + 1
