@@ -27,11 +27,7 @@ describe 'App' do
      # str = args.first.to_s
       #str if File.exist?(str)
    # end
-    @base_url = "http://uat-portal.blutrumpet.com/"
-    @accept_next_alert = true
-    @driver.manage.timeouts.implicit_wait = 30
-    @verification_errors = []
-
+   
     AppName = Array.new(10){rand(10).to_s(10)}.join
     AppURLBase = "https://play.google.com/store/apps/details?id=com"
     AppURL = (AppURLBase.concat(AppName).concat("com")).to_str()
