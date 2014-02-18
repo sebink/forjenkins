@@ -47,16 +47,16 @@ puts('Test Suite Changed --------Advertiser Campaign---------------')
     @driver.get(@base_url + '/b/site/index.html')
     @driver.find_element(:link, 'LOG IN').click
     @driver.find_element(:name, 'client[email]').clear
-    @driver.find_element(:name, 'client[email]').send_keys 'sebin@blutrumpet.com'
+    @driver.find_element(:name, 'client[email]').send_keys 'sebink@gmail.com'
     @driver.find_element(:name, 'client[password]').click
     @driver.find_element(:name, 'client[password]').clear
-    @driver.find_element(:name, 'client[password]').send_keys 'jan@2014'
+    @driver.find_element(:name, 'client[password]').send_keys 'sebink'
     @driver.find_element(:xpath, "(//input[@value='SUBMIT'])[2]").click
 
     !60.times{ break if (element_present?(:id, 'userName') rescue false); sleep 1 }
     sleep 10
 
-    verify { (@driver.find_element(:id, 'userName').text).should == 'Sebin Baby'}
+    #verify { (@driver.find_element(:id, 'userName').text).should == 'Sebin Baby'}
     verify { (@driver.title).should == 'BluTrumpet Admin'}
     verify { (@driver.find_element(:css, 'button.drkGrey').text).should == 'FILTER' }
     verify { (@driver.find_element(:css, 'div.chartHdr').text).should == 'Application Earn' }
