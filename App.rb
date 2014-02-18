@@ -11,8 +11,8 @@ describe 'App' do
   # Init Test
   before(:all) do
 
-    path1= "/Applications/Firefox.app/Contents/MacOS/firefox-bin"
-        Selenium::WebDriver::Firefox.path =  path1
+   # path1= "/Applications/Firefox.app/Contents/MacOS/firefox-bin"
+    #    Selenium::WebDriver::Firefox.path =  path1
     
         @driver = Selenium::WebDriver.for :firefox
         @driver.manage().window().maximize()
