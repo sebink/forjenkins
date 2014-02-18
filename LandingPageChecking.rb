@@ -37,6 +37,7 @@ describe "LandingPageChecking" do
     puts('.....................Checking Landing Page.....................')
 
     @driver.get(@base_url + "/b/site/index.html")
+    sleep 5
     (@driver.find_element(:xpath,"//*[@id='topBar']/div/div[1]/ul[2]/li[3]/a").text).should == "SIGN U12P"
     #verify { (@driver.find_element(:xpath, "//*[@id='topBar']/div/div[1]/ul[2]/li[3]/a").text).should == "SIGN U12P" }
     #verify { (@driver.find_element(:xpath, "//*[@id='topBar']/div/div[1]/ul[2]/li[4]/a").text).should == "LOG IN" }
