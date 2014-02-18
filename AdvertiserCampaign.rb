@@ -2,7 +2,7 @@ require 'json'
 require 'selenium-webdriver'
 require 'rspec'
 include RSpec::Expectations
-require './App.rb'
+load './App.rb'
 
 describe 'AdvertiserCampaign' do
 
