@@ -10,11 +10,13 @@ require 'rspec'
   @motiveCid= ""
   @motiveofferid=""
   
+  dateTime = ((Time.new).strftime("%Y-%m-%d %H.%M")).to_s
   book = Spreadsheet.open('/Users/sebibbaby/Google Drive/QA/SQL Scripts/Exports/Motive_Camp_Status.xls')
+  modifiedFile = "/Users/sebibbaby/Google Drive/QA/Automation Test Results/Partner Campaign Analysis/Motive/#{dateTime}.xls"
   doc = (Nokogiri::XML(open("http://motivefeed.com/affiliate/campaigns_v2?api_key=LstKht1GD0&affiliate_id=64104.xml"))).to_s
   doc1 = Nokogiri::XML(open("http://motivefeed.com/affiliate/campaigns_v2?api_key=LstKht1GD0&affiliate_id=64104.xml"))
+  dest_folder = "/Users/Shared/Jenkins/Home/jobs/ParterAnalysisMotive/workspace/"
   sheet1 = book.worksheet('Part 1') # can use an index or worksheet name
-  dateTime = ((Time.new).strftime("%Y-%m-%d %H.%M")).to_s
   
   sheet1[0,8] = "Motive Status"
   sheet1[0,11] = "Motive Country Status"
@@ -117,4 +119,7 @@ end
   end     
 end
 
-book.write "/Users/sebibbaby/Google Drive/QA/Automation Test Results/Partner Campaign Analysis/Motive/ #{dateTime}.xls"
+book.write modifiedFile
+
+FileUtils.cp(modifiedFile, dest_folder)
+
