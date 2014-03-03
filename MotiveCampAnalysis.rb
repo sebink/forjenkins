@@ -113,7 +113,10 @@ end
     if(from == "country")
         val1.casecmp val2
     else
-      if(val2.include? val1)
+      if(val2 =="") 
+        #puts(val1 + "empty")
+        return 1
+      else(val2.include? val1)
     end
       return 0
     end
