@@ -74,7 +74,7 @@ describe "AppwallTesting" do
     #Creating the URL for android 
     gettingUrl(@filenameiOS,"ipad",@iPadMaxOSVersion)
     summaryWrite(@filenameiOS)
-    sleep 2
+    #sleep 2
     
     #Creating the URL for android 
     gettingUrl(@filenameiphone,"iphone",@iPhoneMaxOSVersion)
