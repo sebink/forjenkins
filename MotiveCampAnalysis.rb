@@ -12,7 +12,9 @@ require 'rspec'
   
   dateTime = ((Time.new).strftime("%Y-%m-%d %H.%M")).to_s
   
-  book = Spreadsheet.open('/Users/sebibbaby/Google Drive/QA/SQL Scripts/Exports/Motive_Camp_Status.xls')
+  FileUtils.cp("/Users/sebibbaby/Google Drive/QA/SQL Scripts/Exports/Motive_Camp_Status.xls", File.dirname(__FILE__))
+  book = Spreadsheet.open(File.dirname(__FILE__)+"/Motive_Camp_Status.xls")
+  #book = Spreadsheet.open('/Users/sebibbaby/Google Drive/QA/SQL Scripts/Exports/Motive_Camp_Status.xls')
   modifiedFile = "/Users/sebibbaby/Google Drive/QA/Automation Test Results/Partner Campaign Analysis/Motive/#{dateTime}.xls"
   doc = (Nokogiri::XML(open("http://motivefeed.com/affiliate/campaigns_v2?api_key=LstKht1GD0&affiliate_id=64104.xml"))).to_s
   doc1 = Nokogiri::XML(open("http://motivefeed.com/affiliate/campaigns_v2?api_key=LstKht1GD0&affiliate_id=64104.xml"))
@@ -124,6 +126,6 @@ end
 end
 
 book.write modifiedFile
-
+File.delete(File.dirname(__FILE__)+"/Motive_Camp_Status.xls")
 FileUtils.cp(modifiedFile, dest_folder)
 
