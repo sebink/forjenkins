@@ -3,6 +3,9 @@ require 'open-uri'
 require 'spreadsheet'
 require 'rspec'
 
+
+dateTime = ((Time.new).strftime("%Y-%m-%d %H.%M")).to_s
+FileUtils.cp("/Users/sebibbaby/Google Drive/QA/SQL Scripts/Exports/Motive_Camp_Status.xls", File.dirname(__FILE__))
 book = Spreadsheet.open('/Users/sebibbaby/Google Drive/QA/SQL Scripts/Exports/Motive_Camp_Status.xls')#/Users/sebibbaby/Google Drive/QA/SQL Scripts
 @doc = Nokogiri::XML(open("http://motivefeed.com/affiliate/campaigns_v2?api_key=LstKht1GD0&affiliate_id=64104.xml"))
 modifiedFile = "/Users/sebibbaby/Google Drive/QA/Automation Test Results/Partner Campaign Analysis/Motive/#{dateTime}.xls"
@@ -144,6 +147,6 @@ end
  #book.write '912132233232.xls' 
 exactcid
 camparingvalues
-puts @xcelarr.length
-  #book.write '912132233232.xls'
-book.write modifiedFile 
+book.write modifiedFile
+File.delete(File.dirname(__FILE__)+"/Motive_Camp_Status.xls")
+FileUtils.cp(modifiedFile, dest_folder)
