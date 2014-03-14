@@ -47,7 +47,7 @@ end
 
 
 def getvaluesOfActiveOnes(mcid,ind)
- puts "count"+@xmlString.scan(mcid).count.to_s+ " "+mcid
+ #puts "count"+@xmlString.scan(mcid).count.to_s+ " "+mcid
  if @xmlString.scan(mcid).count == 0
    @sheet1[ind,9] = "Paused"
    #puts "pause" + mcid.to_s
