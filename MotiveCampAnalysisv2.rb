@@ -41,7 +41,8 @@ def exactcid
   end
   if (row[6]=="Paused" || row[6]=="Expired")
   @xcelarr<<""
-  getvaluesOfActiveOnes(row[1],ind)
+  #getvaluesOfActiveOnes(row[1],ind)
+  @sheet1[ind,9] = "Paused"
   end
  end
 end
