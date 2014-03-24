@@ -13,10 +13,12 @@ describe "LandingPageChecking" do
     
      #path1= "/usr/bin/"
     #puts(path1)
-    # Selenium::WebDriver::Firefox::Binary.path = '/Applications/Firefox.app/Contents/MacOS/firefox-bin'
+     Selenium::WebDriver::Firefox::Binary.path = '/Applications/Firefox.app/Contents/MacOS/firefox-bin'
     #Selenium::WebDriver::Firefox.path =  path1
     
-    @driver = Selenium::WebDriver.for(:remote, :url => "/Applications/Firefox.app/Contents/MacOS/firefox-bin")
+    @driver = Selenium::WebDriver.for :firefox
+    
+    @driver.manage.timeouts.implicit_wait = 30
       @driver.manage().window().maximize()
       
  
