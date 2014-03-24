@@ -8,9 +8,7 @@ describe "AppwallTesting" do
 
   before(:all) do
     
-    #Selenium::WebDriver::Firefox::Binary.path = '/Applications/Firefox.app/Contents/MacOS/firefox-bin'
-    
-    caps = Selenium::WebDriver::Remote::Capabilities.firefox
+ caps = Selenium::WebDriver::Remote::Capabilities.firefox
       caps['platform'] = "Windows 8.1"
       caps['version'] = "26"
       caps[:name] = "Appia Check "
@@ -19,7 +17,6 @@ describe "AppwallTesting" do
         :remote,
         :url => "http://btsauce:3d284ce4-ce68-4128-acc2-da28928ff141@ondemand.saucelabs.com:80/wd/hub",
         :desired_capabilities => caps)
-        
     
     
 
@@ -77,7 +74,7 @@ describe "AppwallTesting" do
     #while @driver.find_element(:xpath=>"//*[@id='viewAll").displayed?
     #end
     
-    sleep 20
+    sleep 30
     getdata
     
     comparing
