@@ -2,13 +2,18 @@ require 'rubygems'
 require "selenium-webdriver"
 require "rspec"
 require 'spreadsheet'
+require 'headless'
 include RSpec::Expectations
+
 
 describe "AppwallTesting" do
 
   before(:all) do
 
     #Selenium::WebDriver::Firefox.path = "/Applications/Firefox.app/Contents/MacOS/firefox-bin"
+    
+    headless = Headless.new
+    headless.start
     
     @driver = Selenium::WebDriver.for :firefox
     @driver.manage().window().maximize()
