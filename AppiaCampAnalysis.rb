@@ -7,7 +7,7 @@ include RSpec::Expectations
 describe "AppwallTesting" do
 
   before(:all) do
-=begin
+
     Selenium::WebDriver::Firefox.path = "/Applications/Firefox.app/Contents/MacOS/firefox-bin"
     @driver = Selenium::WebDriver.for :firefox
     @driver.manage().window().maximize()
@@ -17,19 +17,9 @@ describe "AppwallTesting" do
     @driver.manage.timeouts.implicit_wait = 30
     @verification_errors = []
     @wait = Selenium::WebDriver::Wait.new(:timeout => 20)
-=end    
     
     
-    caps = Selenium::WebDriver::Remote::Capabilities.firefox
-    caps['platform'] = "Windows 8.1"
-    caps['version'] = "26"
-    caps[:name] = "Landing Page Check "
-
-    @driver = Selenium::WebDriver.for(
-        :remote,
-        :url => "http://btsauce:3d284ce4-ce68-4128-acc2-da28928ff141@ondemand.saucelabs.com:80/wd/hub",
-        :desired_capabilities => caps)
-        
+    
     @dest_folder = File.dirname(__FILE__)
     @dateTime = ((Time.new).strftime("%Y-%m-%d %H.%M")).to_s
     @modifiedFile = "/Users/sebibbaby/Google Drive/QA/Automation Test Results/Partner Campaign Analysis/Appia/#{@dateTime}.xls"
