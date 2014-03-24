@@ -8,7 +8,7 @@ describe "AppwallTesting" do
 
   before(:all) do
 
-    Selenium::WebDriver::Firefox::Binary.path= = '/Applications/Firefox.app/Contents/MacOS/firefox-bin'
+    Selenium::WebDriver::Firefox::Binary.path = '/Applications/Firefox.app/Contents/MacOS/firefox-bin'
     
     @driver = Selenium::WebDriver.for :firefox
     @driver.manage().window().maximize()
