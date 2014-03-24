@@ -13,7 +13,7 @@ describe "LandingPageChecking" do
     
      #path1= "/usr/bin/"
     #puts(path1)
-     Selenium::WebDriver::Firefox::Binary.path = '/Applications/Firefox.app/Contents/MacOS/firefox-bin'
+     #Selenium::WebDriver::Firefox::Binary.path = '/Applications/Firefox.app/Contents/MacOS/firefox-bin'
     #Selenium::WebDriver::Firefox.path =  path1
     
     @driver = Selenium::WebDriver.for :firefox

@@ -2,21 +2,26 @@ require 'rubygems'
 require "selenium-webdriver"
 require "rspec"
 require 'spreadsheet'
-require 'headless'
 include RSpec::Expectations
-
 
 describe "AppwallTesting" do
 
   before(:all) do
+    
+    #Selenium::WebDriver::Firefox::Binary.path = '/Applications/Firefox.app/Contents/MacOS/firefox-bin'
+    
+    caps = Selenium::WebDriver::Remote::Capabilities.firefox
+      caps['platform'] = "Windows 8.1"
+      caps['version'] = "26"
+      caps[:name] = "Appia Check "
 
-    #Selenium::WebDriver::Firefox.path = "/Applications/Firefox.app/Contents/MacOS/firefox-bin"
+      @driver = Selenium::WebDriver.for(
+        :remote,
+        :url => "http://btsauce:3d284ce4-ce68-4128-acc2-da28928ff141@ondemand.saucelabs.com:80/wd/hub",
+        :desired_capabilities => caps)
+        
     
-    headless = Headless.new
-    headless.start
     
-    @driver = Selenium::WebDriver.for :firefox
-    @driver.manage().window().maximize()
 
     @base_url = "https://via.appia.com/login.html"
     @accept_next_alert = true
@@ -41,7 +46,7 @@ describe "AppwallTesting" do
   
   after(:all) do
     @driver.quit
-    #FileUtils.cp(@modifiedFile, @dest_folder)
+    FileUtils.cp(@modifiedFile, @dest_folder)
   end
 
 
