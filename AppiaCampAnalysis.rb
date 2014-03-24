@@ -7,7 +7,7 @@ include RSpec::Expectations
 describe "AppwallTesting" do
 
   before(:all) do
-    
+    Selenium::WebDriver::Firefox.path = "/Applications/Firefox.app/Contents/MacOS/firefox-bin"
     @driver = Selenium::WebDriver.for :firefox
     @driver.manage().window().maximize()
 
