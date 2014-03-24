@@ -11,10 +11,11 @@ describe "LandingPageChecking" do
 
     #...........................For SauceLab..........................
     
-     path1= "/Applications/Firefox.app/Contents/MacOS/firefox-bin"
-        Selenium::WebDriver::Firefox.path =  path1
+     path1= "/usr/bin/"
+    puts(path1)
+    Selenium::WebDriver::Firefox.path =  path1
     
-        @driver = Selenium::WebDriver.for :firefox
+    @driver = Selenium::WebDriver.for :firefox
       @driver.manage().window().maximize()
       
  
