@@ -3,7 +3,7 @@ require 'rubygems'
 require "selenium-webdriver"
 require "rspec"
 include RSpec::Expectations
-require File.dirname(__FILE__)+"/Env.rb"
+
 
 describe "LandingPageChecking" do
 
