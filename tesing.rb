@@ -3,7 +3,7 @@ require 'rubygems'
 require "selenium-webdriver"
 require "rspec"
 include RSpec::Expectations
-#require File.dirname(__FILE__)+"/Env.rb"
+require File.dirname(__FILE__)+"/Env.rb"
 
 describe "LandingPageChecking" do
 
@@ -11,7 +11,8 @@ describe "LandingPageChecking" do
 
     #...........................For SauceLab..........................
     
-      
+       Selenium::WebDriver::Firefox.path = "/Applications/Firefox.app/Contents/MacOS/firefox-bin"
+    #@driver = Selenium::WebDriver.for :firefox
       @driver = Selenium::WebDriver.for :firefox
       @driver.manage().window().maximize()
       
