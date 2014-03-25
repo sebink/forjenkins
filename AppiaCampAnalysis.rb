@@ -7,7 +7,7 @@ include RSpec::Expectations
 describe "AppwallTesting" do
 
   before(:all) do
-    
+=brgin    
  caps = Selenium::WebDriver::Remote::Capabilities.firefox
       caps['platform'] = "Windows 8.1"
       caps['version'] = "26"
@@ -18,7 +18,9 @@ describe "AppwallTesting" do
         :url => "http://btsauce:3d284ce4-ce68-4128-acc2-da28928ff141@ondemand.saucelabs.com:80/wd/hub",
         :desired_capabilities => caps)
     
-    
+=end
+  
+    @driver = Selenium::WebDriver.for :firefox
 
     @base_url = "https://via.appia.com/login.html"
     @accept_next_alert = true
