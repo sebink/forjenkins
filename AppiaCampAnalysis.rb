@@ -22,9 +22,9 @@ describe "AppwallTesting" do
 
     @base_url = "https://via.appia.com/login.html"
     @accept_next_alert = true
-    @driver.manage.timeouts.implicit_wait = 30
+    @driver.manage.timeouts.implicit_wait = 100
     @verification_errors = []
-    @wait = Selenium::WebDriver::Wait.new(:timeout => 20)
+    @wait = Selenium::WebDriver::Wait.new(:timeout => 100)
     
     
     
@@ -74,7 +74,7 @@ describe "AppwallTesting" do
     #while @driver.find_element(:xpath=>"//*[@id='viewAll").displayed?
     #end
     
-    sleep 30
+    sleep 100
     getdata
     
     comparing
