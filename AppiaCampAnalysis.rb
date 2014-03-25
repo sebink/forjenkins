@@ -7,7 +7,7 @@ include RSpec::Expectations
 describe "AppwallTesting" do
 
   before(:all) do
-=brgin    
+=begin    
  caps = Selenium::WebDriver::Remote::Capabilities.firefox
       caps['platform'] = "Windows 8.1"
       caps['version'] = "26"
