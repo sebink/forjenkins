@@ -9,6 +9,7 @@ FileUtils.cp("/Users/sebibbaby/Google Drive/QA/SQL Scripts/Exports/Motive_Camp_S
 book = Spreadsheet.open('/Users/sebibbaby/Google Drive/QA/SQL Scripts/Exports/Motive_Camp_Status.xls')#/Users/sebibbaby/Google Drive/QA/SQL Scripts
 @doc = Nokogiri::XML(open("http://motivefeed.com/affiliate/campaigns_v2?api_key=LstKht1GD0&affiliate_id=64104.xml"))
 modifiedFile = "/Users/sebibbaby/Google Drive/QA/Automation Test Results/Partner Campaign Analysis/Motive/#{dateTime}.xls"
+modifiedFile1 = "/Users/sebibbaby/Google Drive/QA/Automation Test Results/Partner Campaign Analysis/Appia/appia.xls"
 dest_folder = File.dirname(__FILE__)
 @sheet1 = book.worksheet(0)
 @xmlString = @doc.inspect()
@@ -152,3 +153,4 @@ camparingvalues
 book.write modifiedFile
 File.delete(File.dirname(__FILE__)+"/Motive_Camp_Status.xls")
 FileUtils.cp(modifiedFile, dest_folder)
+FileUtils.cp(modifiedFile1, dest_folder)
