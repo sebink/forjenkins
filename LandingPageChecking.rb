@@ -13,9 +13,9 @@ describe "LandingPageChecking" do
 
     #...........................For SauceLab..........................
 
-    Selenium::WebDriver::Firefox.path = "/usr/bin/google-chrome"
+    #Selenium::WebDriver::Firefox.path = "/usr/bin/google-chrome"
     
-        @driver = Selenium::WebDriver.for :chrome
+        @driver = Selenium::WebDriver.for :safari
         @driver.manage().window().maximize()
 
         @base_url = "http://uat-portal.blutrumpet.com/"
