@@ -15,7 +15,7 @@ describe "LandingPageChecking" do
 
    # Selenium::WebDriver::Firefox.path = "/Applications/Firefox.app/Contents/MacOS/firefox-bin"
     
-        @driver = Selenium::WebDriver.for :firefox
+        @driver = Selenium::WebDriver.for :chrome
         @driver.manage().window().maximize()
 
         @base_url = "http://uat-portal.blutrumpet.com/"
