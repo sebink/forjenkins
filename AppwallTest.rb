@@ -12,8 +12,8 @@ describe "AppwallTesting" do
     
     #path = "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
     #Selenium::WebDriver::Chrome.path = "/usr/bin/chromedriver"
-    Selenium::WebDriver::Safari.path = "/Applications/Safari.app/Contents/MacOS/Safari"
-    @driver = Selenium::WebDriver.for :safari
+    #Selenium::WebDriver::Safari.path = "/Applications/Safari.app/Contents/MacOS/Safari"
+    @driver = Selenium::WebDriver.for :firefox
     @driver.manage().window().maximize()
 
     @base_url = "http://apps.blutrumpet.com/products/"
