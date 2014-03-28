@@ -59,7 +59,7 @@ describe "AppwallTesting" do
     @wait.until { @driver.find_element(:xpath => "//*[@id='emailAddress']").displayed? }
     @driver.find_element(:xpath, "//*[@id='emailAddress']").clear
     @driver.find_element(:xpath, "//*[@id='emailAddress']").click
-    @driver.find_element(:xpath, "//*[@id='emailAddress']").send_keys "hsipe@breaktimestudios.com"
+    @driver.find_element(:xpath, "//*[@id='emailAddress']").send_keys "
     
     @driver.find_element(:xpath, "//*[@id='password']").clear
     @driver.find_element(:xpath, "//*[@id='password']").click
