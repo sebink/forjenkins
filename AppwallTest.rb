@@ -12,7 +12,7 @@ describe "AppwallTesting" do
     
     #path = "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
     #Selenium::WebDriver::Chrome.path = "/usr/bin/chromedriver"
-    Selenium::WebDriver::Chrome.path = "/Applications/Safari.app/Contents/MacOS/Safari"
+    Selenium::WebDriver::Safari.path = "/Applications/Safari.app/Contents/MacOS/Safari"
     @driver = Selenium::WebDriver.for :safari
     @driver.manage().window().maximize()
 
