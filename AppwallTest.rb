@@ -23,12 +23,12 @@ describe "AppwallTesting" do
     
     #To create files for each platform to write the summary of the test.. 
     dateTime = ((Time.new).strftime("%Y-%m-%d %H.%M")).to_s
-    @filenameAndroid = "/Users/sebibbaby/Google Drive/QA/Automation Test Results/AppWall/#{dateTime}_Android"
-    @filenameiOS = "/Users/sebibbaby/Google Drive/QA/Automation Test Results/AppWall/#{dateTime}_ipad"
-    @filenameiphone = "/Users/sebibbaby/Google Drive/QA/Automation Test Results/AppWall/#{dateTime}_iphone"
+    @filenameAndroid = "#{dateTime}_Android"
+    @filenameiOS = "#{dateTime}_ipad"
+    @filenameiphone = "#{dateTime}_iphone"
     
     #Getting the list of countries - Total 250 countries.
-    @listOfCountries = Country.all    #[["au","au"],["nz","nz"],["xx","xx"]]#Country.all
+    @listOfCountries = [["au","au"],["nz","nz"],["xx","xx"]]##Country.all    #[["au","au"],["nz","nz"],["xx","xx"]]#Country.all
     
     #Array to store the Appwalls displaying along with countries.
     @ListOfCountriesHaveApp = []
