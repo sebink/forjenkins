@@ -2,7 +2,7 @@ require "json"
 require 'rubygems'
 require "selenium-webdriver"
 require "rspec"
-require 'countries'
+#require 'countries'
 include RSpec::Expectations
 
 describe "AppwallTesting" do
