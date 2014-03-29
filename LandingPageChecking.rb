@@ -17,7 +17,7 @@ describe "LandingPageChecking" do
     prefs = {
     :download => {
     :prompt_for_download => false, 
-    :default_directory => "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+    :default_directory => "/Users/Shared/Jenkins/Home/tools/chromedriver"
   }
 }
 
