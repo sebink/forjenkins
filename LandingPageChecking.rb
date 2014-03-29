@@ -15,7 +15,7 @@ describe "LandingPageChecking" do
 
     #Selenium::WebDriver::Firefox.path = "/usr/bin/google-chrome"
     prefs = {
-    download => {
+    :download => {
     :prompt_for_download => false, 
     :default_directory => "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
   }
