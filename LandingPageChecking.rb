@@ -16,7 +16,7 @@ describe "LandingPageChecking" do
     #Selenium::WebDriver::Firefox.path = "/usr/bin/google-chrome"
   
 
-      @driver = Selenium::WebDriver.for :chrome
+      @driver = Selenium::WebDriver.for :safari
         #@driver = Selenium::WebDriver.for :firefox
         @driver.manage().window().maximize()
 
