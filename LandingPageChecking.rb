@@ -13,7 +13,7 @@ describe "LandingPageChecking" do
 
     #...........................For SauceLab..........................
 
-    #Selenium::WebDriver::Firefox.path = "/usr/bin/google-chrome"
+    Selenium::WebDriver::Safari.path = "/Applications/Safari.app/Contents/MacOS/safari"
   
 
       @driver = Selenium::WebDriver.for :safari
