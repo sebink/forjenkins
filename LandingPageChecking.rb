@@ -21,7 +21,7 @@ describe "LandingPageChecking" do
   #}
 #}
 #Selenium::WebDriver::Safari.path = "/Users/Shared/Jenkins/Home/Safari.app/Contents/MacOS/safari"
-      @driver = Selenium::WebDriver.for :remote, :desired_capabilities => :chrome
+      @driver = Selenium::WebDriver.for :chrome#remote, :desired_capabilities => :chrome
 
         #@driver = Selenium::WebDriver.for :firefox
         @driver.manage().window().maximize()
