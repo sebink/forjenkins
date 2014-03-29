@@ -14,8 +14,14 @@ describe "LandingPageChecking" do
     #...........................For SauceLab..........................
 
     #Selenium::WebDriver::Firefox.path = "/usr/bin/google-chrome"
-    
-        @driver = Selenium::WebDriver.for :firefox
+    download => {
+    :prompt_for_download => false, 
+    :default_directory => "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+  }
+}
+
+      @driver = Selenium::WebDriver.for :chrome, :prefs => prefs
+        #@driver = Selenium::WebDriver.for :firefox
         @driver.manage().window().maximize()
 
         @base_url = "http://uat-portal.blutrumpet.com/"
