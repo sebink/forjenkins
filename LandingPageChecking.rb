@@ -14,14 +14,9 @@ describe "LandingPageChecking" do
     #...........................For SauceLab..........................
 
     #Selenium::WebDriver::Firefox.path = "/usr/bin/google-chrome"
-    prefs = {
-    :download => {
-    :prompt_for_download => false, 
-    :default_directory => "/Users/Shared/Jenkins/Home/tools/chromedriver"
-  }
-}
+  
 
-      @driver = Selenium::WebDriver.for :chrome, :prefs => prefs
+      @driver = Selenium::WebDriver.for :chrome
         #@driver = Selenium::WebDriver.for :firefox
         @driver.manage().window().maximize()
 
