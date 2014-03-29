@@ -13,10 +13,15 @@ describe "LandingPageChecking" do
 
     #...........................For SauceLab..........................
 
-    #Selenium::WebDriver::Safari.path = "/Applications/Safari.app/Contents/MacOS/safari"
-  
-
-      @driver = Selenium::WebDriver.for :chrome
+    #Selenium::WebDriver::Firefox.path = "/usr/bin/google-chrome"
+ #   prefs = {
+  #  :download => {
+   # :prompt_for_download => false, 
+   # :default_directory => "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome2323"
+  #}
+#}
+Selenium::WebDriver::Safari.path = "/Users/Shared/Jenkins/Home/Safari.app/Contents/MacOS/safari"
+      @driver = Selenium::WebDriver.for :safari
         #@driver = Selenium::WebDriver.for :firefox
         @driver.manage().window().maximize()
 
