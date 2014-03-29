@@ -13,10 +13,10 @@ describe "LandingPageChecking" do
 
     #...........................For SauceLab..........................
 
-    Selenium::WebDriver::Safari.path = "/Applications/Safari.app/Contents/MacOS/safari"
+    #Selenium::WebDriver::Safari.path = "/Applications/Safari.app/Contents/MacOS/safari"
   
 
-      @driver = Selenium::WebDriver.for :safari
+      @driver = Selenium::WebDriver.for :chrome
         #@driver = Selenium::WebDriver.for :firefox
         @driver.manage().window().maximize()
 
