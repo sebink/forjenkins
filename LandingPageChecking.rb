@@ -20,10 +20,10 @@ describe "LandingPageChecking" do
    # :default_directory => "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome2323"
   #}
 #}
-Selenium::WebDriver::Safari.path = "/Users/Shared/Jenkins/Library/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
-      @driver = Selenium::WebDriver.for :chrome
+#Selenium::WebDriver::Safari.path = "/Users/Shared/Jenkins/Library/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+      #@driver = Selenium::WebDriver.for :chrome
 
-        #@driver = Selenium::WebDriver.for :firefox
+        @driver = Selenium::WebDriver.for :firefox
         @driver.manage().window().maximize()
 
         @base_url = "http://uat-portal.blutrumpet.com/"
