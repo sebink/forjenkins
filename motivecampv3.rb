@@ -186,5 +186,5 @@ exactcid
 camparingvalues
 book.write @modifiedFile
 #File.delete(File.dirname(__FILE__)+"/Motive_Camp_Status.xls")
-FileUtils.cp(modifiedFile, dest_folder)
+FileUtils.cp(@modifiedFile, dest_folder)
 #FileUtils.cp(modifiedFile1, dest_folder)
