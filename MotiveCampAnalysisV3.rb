@@ -138,14 +138,15 @@ def camparingvalues
     row[10] = "Match"
   end
   if (row[7] == row[16])
-    #puts 1
     row[17] = "Match"
   else
     row[17] = "Mismatch"     
   end  
+  if(row[16].nil?) && row[9] ="Paused"
+          row[17]=""
+          end 
   conutryvalue = row[4].to_s.split(",")
-  #if((CompareValue(row[4].to_s,row[13].to_s,"country")) == 0)
- if((comp(row[4].to_s,row[13].to_s,conutryvalue)) == 1)
+  if((comp(row[4].to_s,row[13].to_s,conutryvalue)) == 1)
         row[14] = "Match"
       else 
         row[14] = "Mismatch"
@@ -157,9 +158,7 @@ def camparingvalues
         row11= row[11].to_s.downcase
         row5 = row[5].to_s.downcase
         
-       # if 
-        
-        if(row11.include? row5)
+      if(row11.include? row5)
         row[12] = "Match"
       else
         row[12] = "Mismatch" 
@@ -173,11 +172,9 @@ end
 def comp(str1,str2,str3)
    str3.each do |s|
     if(str2.include? s )&& (str1.length == str2.length)
-      return 1
-    #puts 1 
+      return 1 
     else
       return 0
-    #puts 0
    end
   end
 end
@@ -186,7 +183,7 @@ end
 exactcid
 camparingvalues
 book.write @modifiedFile
+
 File.delete(File.dirname(__FILE__)+"/Motive_Camp_Status.xls")
 FileUtils.cp(@modifiedFile, dest_folder)
-FileUtils.cp(@appiafile,dest_folder)
-#FileUtils.cp(modifiedFile1, dest_folder)
+FileUtils.cp(@appiafile, dest_folder)
