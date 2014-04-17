@@ -60,7 +60,9 @@ def getvaluesOfActiveOnes(mcid,ind)
       if(mcid == mCampId)
         
             xml.xpath("allowed_countries/allowed_country").each do |t| 
-            @coutryTargeting<<t.text.downcase
+              if(t.text != "AN" && t.text != "KP")
+                  @coutryTargeting<<t.text.downcase
+              end    
         end
           xml.xpath("allowed_devices/allowed_device").each do |d|
           @devices<<d.text
@@ -94,7 +96,9 @@ def getvaluesOfActiveOnes1(mcid,ind)
     
     if trakingLink.include? mcid  
         xml.xpath("allowed_countries/allowed_country").each do |t| 
-        @coutryTargeting<<t.text.downcase
+        if(t.text != "AN" && t.text != "KP")
+          @coutryTargeting<<t.text.downcase
+      end
     end
       xml.xpath("allowed_devices/allowed_device").each do |d|
       @devices<<d.text
