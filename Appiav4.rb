@@ -23,8 +23,8 @@ describe "AppiaCampAnalysisV4" do
     @dest_folder = File.dirname(__FILE__)
     dateTime = ((Time.now - (240 * 60 + 0)).strftime("%Y-%m-%d %H.%M")).to_s
     
-    @modifiedFile = "/Users/sebibbaby/Google Drive/QA/Automation Test Results/Partner Campaign Analysis/Appia/Appia_#{@dateTime}.xls"
-    @book = Spreadsheet.open('/Users/sebibbaby/Google Drive/QA/SQL Scripts/Exports/Appia_Camp_Status.xls')
+    @modifiedFile = "/home/dev/GoogleDrive/QA/Automation Test Results/Partner Campaign Analysis/Appia/Appia_#{@dateTime}.xls"
+    @book = Spreadsheet.open('/home/dev/GoogleDrive/QA/SQL Scripts/Exports/Appia_Camp_Status.xls')
     
     @sheet1 = @book.worksheet(0)
     
