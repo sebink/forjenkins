@@ -1,190 +1,265 @@
-require 'nokogiri'
-require 'open-uri'
+require 'rubygems'
+require "selenium-webdriver"
+require "rspec"
 require 'spreadsheet'
-require 'rspec'
+include RSpec::Expectations
+require 'countries'
 
+describe "AppiaCampAnalysisV4" do
 
-dateTime = ((Time.now - (240 * 60 + 0)).strftime("%Y-%m-%d %H.%M")).to_s
-
-book = Spreadsheet.open('/home/dev/GoogleDrive/QA/SQL Scripts/Exports/Motive_Camp_Status.xls')
-@modifiedFile = "/home/dev/GoogleDrive/QA/Automation Test Results/Partner Campaign Analysis/Motive/Motive #{dateTime}.xls"
-@doc = Nokogiri::XML(open("http://motivefeed.com/affiliate/campaigns_v2?api_key=LstKht1GD0&affiliate_id=64104.xml"))
-dest_folder = File.dirname(__FILE__)
-
-@sheet1 = book.worksheet(0)
-@xmlString = @doc.inspect()
-
-@xcelarr =[]
-@coutryTargeting=[]
-@devices = []
-@motiveCid= ""
-@motiveofferid=""
-
-@sheet1[0,9] = "Motive Status"
-@sheet1[0,14] = "Motive Country Status"
-@sheet1[0,12] = "Motive Platform Status"
-@sheet1[0,16] = "Motive PayOut"
-
-
-def exactcid 
-  @sheet1.each_with_index 0 do |row,ind|
-  break if row[0].nil?
-  if (row[3].include? ":") 
-    str = row[3].to_s[8..13]
-    @xcelarr<< str 
-    row[8]=str 
-     getvaluesOfActiveOnes(str,ind)
-     
-  end
-  if unless (row[3].include? ":")
-  @xcelarr<<""
-  getvaluesOfActiveOnes1(row[1],ind)
-  #@sheet1[ind,9] = "Paused"
-  end
-  end
-  if row[9].nil?
-    @sheet1[ind,9] = "Paused"
-  end
- end
-end
-
-def getvaluesOfActiveOnes(mcid,ind)
-
-  if @xmlString.scan(mcid).count == 0
-    @sheet1[ind,9] = "Paused"
-    return
-  end
-
-  @doc.xpath('//campaign').each do |xml|
-     mCampId   = xml.at('campaign_id').text 
-      if(mcid == mCampId)
-        
-            xml.xpath("allowed_countries/allowed_country").each do |t| 
-              if(t.text != "AN" && t.text != "KP")
-                  @coutryTargeting<<t.text.downcase
-              end    
-        end
-          xml.xpath("allowed_devices/allowed_device").each do |d|
-          @devices<<d.text
-        end
-          @motiveofferid=xml.xpath("offer_id").text
-          #@motiveofferid=oid.text
-
-      payout = (xml.xpath('payout').text)[1..5]
-      
-       @sheet1[ind,9] = "Active"
-       @sheet1[ind,15] = @motiveofferid
-       @sheet1[ind,13]= @coutryTargeting.join(",")  
-       @sheet1[ind,11]= @devices.join(",")
-       @sheet1[ind,16]= payout    
-        
-        @coutryTargeting.clear
-        @devices.clear
-        @motiveCname = ""
-        @motiveCname = ""
-        @motiveCname= ""
-    end
-  end
-end
-
-def getvaluesOfActiveOnes1(mcid,ind)
-  
-    @doc.xpath('//campaign').each do |xml|
-    trakingLink   = xml.at('tracking_link').text
-  #@xmlarr<<trakingLink
-  #@xcelarr.each do |values|
+  before(:all) do
     
-    if trakingLink.include? mcid  
-        xml.xpath("allowed_countries/allowed_country").each do |t| 
-        if(t.text != "AN" && t.text != "KP")
-          @coutryTargeting<<t.text.downcase
-      end
+    
+    @driver = Selenium::WebDriver.for :firefox
+    
+    @driver.manage().window().maximize()
+
+    @base_url = "https://via.appia.com/login.html"
+    @accept_next_alert = true
+    @driver.manage.timeouts.implicit_wait = 30
+    @verification_errors = []
+    @wait = Selenium::WebDriver::Wait.new(:timeout => 100)
+
+    @dest_folder = File.dirname(__FILE__)
+    dateTime = ((Time.now - (240 * 60 + 0)).strftime("%Y-%m-%d %H.%M")).to_s
+    
+    @modifiedFile = "/home/dev/GoogleDrive/QA/Automation Test Results/Partner Campaign Analysis/Appia/Appia #{dateTime}.xls"
+    @book = Spreadsheet.open('/home/dev/GoogleDrive/QA/SQL Scripts/Exports/Appia_Camp_Status.xls')
+    
+    @sheet1 = @book.worksheet(0)
+    
+     @sheet1[0,8] = "Appia Status"
+     @sheet1[0,10] = "Appia Payout"
+     @sheet1[0,12] = "Appia Geo"
+     @sheet1[0,16] = "Appia Platform"
+     @sheet1[0,17] = "Appia Id"
+   
+ 
+      @xcelarr = []
+      @allActiveCamp = []
+      @platform =[]
+      @geo = []
+ 
+  end
+  
+  after(:all) do
+    @driver.quit
+  end
+
+  def gettingDataFromExcel
+  
+      @sheet1.each 1 do |row|
+      break if row[0].nil? # if first cell empty
+      @xcelarr<< row[1].to_s
+ 
     end
-      xml.xpath("allowed_devices/allowed_device").each do |d|
-      @devices<<d.text
-    end
-      xml.xpath("campaign_id").each do |cid|
-      @motiveCid = cid.text
-    end
-      xml.xpath("offer_id").each do |oid|
-      @motiveofferid = oid.text
-    end
-    payout = (xml.xpath('payout').text)[1..5]
+  end
+  
+  it "Checking" do
+    
+    gettingDataFromExcel
+    
+    @driver.get(@base_url)
+    @wait.until { @driver.find_element(:xpath => "//*[@id='emailAddress']").displayed? }
+    @driver.find_element(:xpath, "//*[@id='emailAddress']").clear
+    @driver.find_element(:xpath, "//*[@id='emailAddress']").click
+    @driver.find_element(:xpath, "//*[@id='emailAddress']").send_keys "hsipe@breaktimestudios.com"
+    
+    @driver.find_element(:xpath, "//*[@id='password']").clear
+    @driver.find_element(:xpath, "//*[@id='password']").click
+    @driver.find_element(:xpath, "//*[@id='password']").send_keys "appia123"
+    
+    @driver.find_element(:xpath, "//*[@id='loginButton']").click
+    @wait.until { @driver.find_element(:xpath => "html/body/nav/div[2]/ul[1]/li[1]/a").displayed? }
+    
+    @driver.get("https://via.appia.com/manualDashboard.html")
+    
+    @wait.until { @driver.find_element(:xpath => "//*[@id='filters']/div[2]/div/button").displayed? }
+    
+    repeatForActiveAndPending("Active")
+    sleep 3
+    
+    gettingGeosAndPlatforms
+    
+    camparingcells
+    
+    @book.write @modifiedFile
+    FileUtils.cp(@modifiedFile, @dest_folder)
+    
+  end
+
+  def repeatForActiveAndPending(stat)
       
-       @sheet1[ind,9] = "Active"
-       @sheet1[ind,15] = @motiveofferid
-       @sheet1[ind,13]= @coutryTargeting.join(",")  
-       @sheet1[ind,11]= @devices.join(",")
-       @sheet1[ind,16]= payout    
-        
-        @coutryTargeting.clear
-        @devices.clear
-        @motiveCname = ""
-        @motiveCname = ""
-        @motiveCname= ""
-    end
-   end
-end  
-
-
-def camparingvalues
-  
-  @sheet1.each_with_index 1 do |row,ind|
-  break if row[0].nil?
-  
-  if(row[9] == row[6])
-         row[10] = "Match"
-       
-   else
-     row[10] = "MisMatch"
-   end    
-  if (row[6] == "Expired")
-    row[10] = "Match"
-  end
-  if (row[7] == row[16])
-    row[17] = "Match"
-  else
-    row[17] = "Mismatch"     
-  end  
-  if(row[16].nil?) && row[9] ="Paused"
-          row[17]=""
-          end 
-  conutryvalue = row[4].to_s.split(",")
-  if((comp(row[4].to_s,row[13].to_s,conutryvalue)) == 1)
-        row[14] = "Match"
-      else 
-        row[14] = "Mismatch"
-        if(row[13].nil?)
-          row[14]=""
-          end     
-    end
-      devicevalue = row[5].to_s.split(",")
-        row11= row[11].to_s.downcase
-        row5 = row[5].to_s.downcase
-        
-      if(row11.include? row5)
-        row[12] = "Match"
-      else
-        row[12] = "Mismatch" 
+    @driver.find_element(:xpath,"(//button[@type='button'])[4]").click
+    sleep 2
+    @driver.find_element(:link, stat).click
+    sleep 5
+    @driver.find_element(:xpath, "html/body/div[2]/div[1]/div/header/h1/span").click
+    sleep 3
+    
+      if(stat=="Active")
+       @wait.until { @driver.find_element(:xpath, "//*[@id='viewAll']").displayed? }
+       @driver.find_element(:xpath, "//*[@id='viewAll']").click
+       sleep 50
       end
-      if(row[11].nil?)
-          row[12]=""
-          end   
+      gettingDataFromAPI
   end
-end
-
-def comp(str1,str2,str3)
-   str3.each do |s|
-    if(str2.include? s )&& (str1.length == str2.length)
-      return 1 
-    else
-      return 0
-   end
-  end
-end
-
   
-exactcid
-camparingvalues
-book.write @modifiedFile
-FileUtils.cp(@modifiedFile, dest_folder)
+  def gettingDataFromAPI
+    
+    numberOfGames = @driver.find_elements(:xpath,"//*[@id='campaigns']/tbody/tr").size()
+    puts numberOfGames
+    if numberOfGames > 0
+       for i in 1..numberOfGames
+         
+          status = @driver.find_element(:xpath, "//*[@id='campaigns']/tbody/tr[#{i}]/td[2]").text
+          id = @driver.find_element(:xpath, "//*[@id='campaigns']/tbody/tr[#{i}]/td[3]").text
+          name = @driver.find_element(:xpath, "//*[@id='campaigns']/tbody/tr[#{i}]/td[4]").text
+          payout = (@driver.find_element(:xpath, "//*[@id='campaigns']/tbody/tr[#{i}]/td[6]").text)[1..5].to_f
+
+          @allActiveCamp<<id   
+        end                       
+     end
+  end
+    
+  def gettingGeosAndPlatforms
+    
+    @xcelarr.each_with_index do |id,index|
+      if @allActiveCamp.include? id
+    
+      @driver.get("https://via.appia.com/campaign.html?campaignId=#{id}")
+      @wait.until{@driver.find_element(:xpath,"//*[@id='notification-switch']/div/label").displayed?}
+      payout = (@driver.find_element(:xpath,"//*[@id='payouts-tab']/table/tbody/tr/td[2]").text)[1..5].to_f
+      numberOfCountries = @driver.find_elements(:xpath,'//*[@id="countries"]/li').size()
+       
+          for i in 1..numberOfCountries
+               cName = @driver.find_element(:xpath, "//*[@id='countries']/li[#{i}]").text
+                      if cName =="Great Britain (UK)"
+                        cName = "United Kingdom"
+                     end
+                     if cName =="Croatia (Hrvatska)"
+                        cName = "Croatia"
+                      end
+                      
+                      c = Country.find_country_by_name(cName)
+                      @platform<<c.alpha2
+                      
+           end
+           if @driver.find_element(:xpath, "html/body/div[2]/div[2]/div[2]/div/div[2]/table/tbody/tr[5]/td[1]").text == "Min OS Version"
+               platform = @driver.find_element(:xpath, "html/body/div[2]/div[2]/div[2]/div/div[2]/table/tbody/tr[5]/td[2]").text
+           else
+               platform = @driver.find_element(:xpath, "html/body/div[2]/div[2]/div[2]/div/div[2]/table/tbody/tr[6]/td[2]").text
+           end                                        
+                  
+           if @driver.find_element(:xpath, "html/body/div[2]/div[2]/div[2]/div/div[2]/table/tbody/tr[2]/td[2]").text =="iOS"
+               get(index)
+           else
+              @sheet1[index+1,16] = "Android"
+           end
+
+        @sheet1[index+1,10] = payout
+        @sheet1[index+1,12] = @platform.join(',')
+        @sheet1[index+1,14] = platform
+        @sheet1[index+1,17] = id
+                   
+        @sheet1[index+1,8] = "Active"
+        @platform.clear
+        @geo.clear
+          
+       else
+      @sheet1[index+1,8] = "Paused"
+     end
+    end     
+   end
+   
+   def get(index)
+      if @driver.find_element(:xpath, "html/body/div[2]/div[2]/div[2]/div/div[2]/table/tbody/tr[8]/td[1]").text == "Excluded Devices"
+          numberOfDevices = @driver.find_elements(:xpath,'html/body/div[2]/div[2]/div[2]/div/div[2]/table/tbody/tr[8]/td[2]/ul/li').size()
+           
+              for i in 1..numberOfDevices
+                  pName = @driver.find_element(:xpath, "html/body/div[2]/div[2]/div[2]/div/div[2]/table/tbody/tr[8]/td[2]/ul/li[#{i}]").text
+                  @geo<<pName
+                      
+              end
+      else
+        numberOfDevices = @driver.find_elements(:xpath,'html/body/div[2]/div[2]/div[2]/div/div[2]/table/tbody/tr[9]/td[2]/ul/li').size() 
+              for i in 1..numberOfDevices
+                  pName = @driver.find_element(:xpath, "html/body/div[2]/div[2]/div[2]/div/div[2]/table/tbody/tr[9]/td[2]/ul/li[#{i}]").text
+                  @geo<<pName  
+              end
+      end 
+      
+      if @geo.include? 'Apple iPhone'
+             @sheet1[index+1,16] = "iPad" 
+      end
+      
+      if @geo.include? 'Apple iPad' 
+            @sheet1[index+1,16] = "iPhone"
+      end
+      
+      if @sheet1[index+1,16].nil?
+            @sheet1[index+1,16] = "iPhone,iPad"
+      end           
+    end
+          
+    def camparingcells
+        
+      @sheet1.each_with_index 1 do |row,ind|
+       break if row[0].nil?
+  
+        if(row[6] == row[8])
+           row[9] = "Match"
+       
+        else
+          row[9] = "MisMatch"
+        end
+            
+        if (row[7].to_f == row[10].to_f)
+        row[11] = "Match"
+        else
+        row[11] = "Mismatch"     
+        end
+          
+        if(row[10].nil?) && (row[8] == "Paused")
+        row[11]=""
+        end
+         
+        conutryvalue = row[4].to_s.split(",")
+        row12= row[12].to_s.downcase
+
+        if((comp(row[4].to_s,row12,conutryvalue)) == 1)
+        row[13] = "Match"
+        else 
+        row[13] = "Mismatch"
+        end
+           if(row[12].nil?)
+             row[13]=""
+           end 
+        devicevalue = row[5].to_s.split(",")
+        row16= row[16].to_s.downcase
+        row5 = row[5].to_s.downcase
+
+       #if((comp(row[5].to_s,row[16].to_s,devicevalue)) == 1) 
+       if(row16.include? row5)
+        row[15] = "Match"
+      else
+        row[15] = "Mismatch" 
+      end
+      if(row[16].nil?)
+          row[15]=""
+      end 
+    end
+ end
+
+  def comp(str1,str2,str3)
+    
+     str3.each do |s|
+      
+      if(str2.include? s )&& (str1.length == str2.length)
+        return 1 
+      else
+        return 0
+     end
+    end
+  end                      
+end
