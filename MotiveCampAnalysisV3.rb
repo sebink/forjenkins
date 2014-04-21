@@ -15,7 +15,7 @@ FileUtils.cp("/home/dev/GoogleDrive/QA/SQL Scripts/Exports/Motive_Camp_Status.xl
 book = Spreadsheet.open('/home/dev/GoogleDrive/QA/SQL Scripts/Exports/Motive_Camp_Status.xls')#/Users/sebibbaby/Google Drive/QA/SQL Scripts
 @doc = Nokogiri::XML(open("http://motivefeed.com/affiliate/campaigns_v2?api_key=LstKht1GD0&affiliate_id=64104.xml"))
 @modifiedFile = "/home/dev/GoogleDrive/QA/Automation Test Results/Partner Campaign Analysis/Motive/#{dateTime}.xls"
-@appiafile = "/home/dev/GoogleDrive/QA/Automation Test Results/Partner Campaign Analysis/Appia/appia.xls"
+@appiafile = "/home/dev/GoogleDrive/QA/Automation Test Results/Partner Campaign Analysis/Appia/Appia.xls"
 
 
 
