@@ -4,7 +4,7 @@ require 'spreadsheet'
 require 'rspec'
 
 
-dateTime = ((Time.new).strftime("%Y-%m-%d %H.%M")).to_s
+dateTime = ((Time.now - (240 * 60 + 0)).strftime("%Y-%m-%d %H.%M")).to_s
 #FileUtils.cp("/Users/sebibbaby/Google Drive/QA/SQL Scripts/Exports/Motive_Camp_Status.xls", File.dirname(__FILE__))
 #book = Spreadsheet.open('/Users/sebibbaby/Google Drive/QA/SQL Scripts/Exports/Motive_Camp_Status.xls')#/Users/sebibbaby/Google Drive/QA/SQL Scripts
 #@doc = Nokogiri::XML(open("http://motivefeed.com/affiliate/campaigns_v2?api_key=LstKht1GD0&affiliate_id=64104.xml"))
