@@ -1,3 +1,3 @@
 #! /bin/bash
 
-cd ~/GoogleDrive && grive
+cd /home/dev/GoogleDrive && grive
