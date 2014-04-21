@@ -7,11 +7,8 @@ require 'rspec'
 dateTime = ((Time.now - (240 * 60 + 0)).strftime("%Y-%m-%d %H.%M")).to_s
 
 book = Spreadsheet.open('/home/dev/GoogleDrive/QA/SQL Scripts/Exports/Motive_Camp_Status.xls')
-@modifiedFile = "/home/dev/GoogleDrive/QA/Automation Test Results/Partner Campaign Analysis/Motive/#{dateTime}.xls"
+@modifiedFile = "/home/dev/GoogleDrive/QA/Automation Test Results/Partner Campaign Analysis/Motive/Motive #{dateTime}.xls"
 @doc = Nokogiri::XML(open("http://motivefeed.com/affiliate/campaigns_v2?api_key=LstKht1GD0&affiliate_id=64104.xml"))
-
-#@appiafile = "/home/dev/GoogleDrive/QA/Automation Test Results/Partner Campaign Analysis/Appia/Appia.xls"
-
 dest_folder = File.dirname(__FILE__)
 
 @sheet1 = book.worksheet(0)
