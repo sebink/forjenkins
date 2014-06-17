@@ -1,7 +1,8 @@
 Automation test cases
-includes
-
+============================
 Used selenium webdriver and Ruby to automates the things.
+
+includes
 
 Landing Page Check
 User Registration
